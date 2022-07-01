@@ -8,6 +8,9 @@ const PORT = 3000;
 const app = express();
 
 
+//middlewares
+app.use(cors());
+
 
 
 
