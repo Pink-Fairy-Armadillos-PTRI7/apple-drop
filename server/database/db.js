@@ -15,6 +15,7 @@ mongoose.connection.on('error', (error) => {
 });
 
 const startDB = () => {
+ 
   mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
