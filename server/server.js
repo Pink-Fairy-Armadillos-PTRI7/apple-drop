@@ -29,7 +29,7 @@ app.use((req, res) => res.sendStatus(404));
 
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.message.err);
-  return res.status(errorObj.status).json(errorObj.message);
+  return res.status(errorObj.status).json({ status: errorObj.status,  ...errorObj.message });
 });
 
 

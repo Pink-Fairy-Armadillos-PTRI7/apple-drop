@@ -41,12 +41,12 @@ userController.signUp = async (req, res, next) => {
 
     await User.findOneAndUpdate({ email }, { address: address.id });
 
-    const final = await User.findOne({ email }).populate({
+    user = await User.findOne({ email }).populate({
       path: "address",
       select: "schoolName street city postalCode",
     });
 
-    res.locals.user = final;
+    res.locals.user = user;
     return next();
   } catch (error) {
     return next(constants.createError({ message: { err: error.message } }));
@@ -72,16 +72,19 @@ userController.signIn = async (req, res, next) => {
         }))
     } 
 
-    const user = await User.findOne({email})
+    const user = await User.findOne({email}).populate({
+      path: "address",
+      select: "schoolName street city postalCode",
+    });
 
 
     if (!user) {
-      return next(constants.createError({message: { err: "user does not exist"}}))
+      return next(constants.createError({message: { err: "user does not exist"}, status: 404}))
     } else {
       bcrypt.compare(password, user.password).then((result) => {
 
         if (result) {
-          res.locals.status = "success";
+          res.locals = { ...res.locals, user};
           return next();
         } else {
           return next(createError({message: { err: 'email or password mismatch'}}))
@@ -93,24 +96,5 @@ userController.signIn = async (req, res, next) => {
     return next(constants.createError({ message: { err: error.message } }));
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = userController;
