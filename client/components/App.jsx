@@ -6,12 +6,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/sign-up' element={/*<ExampleComponent />*/<p></p>} />
-        <Route path='/sign-in' element={/*<ExampleComponent />*/<p></p>} />
-        <Route exact path='/' element={<p>Hello, World!</p>} />
+        <Route path="/sign-up" element={/*<ExampleComponent />*/ <p></p>} />
+        <Route path="/sign-in" element={/*<ExampleComponent />*/ <p></p>} />
+        <Route exact path="/" element={<p>Hello, World!</p>} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
 export default App;
