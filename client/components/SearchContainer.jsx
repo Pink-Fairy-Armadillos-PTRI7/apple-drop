@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import axios from './api/axios.js';
-
+import SearchBar from './SearchBar.jsx';
+//Search container is the page users will visit once they click donate to teachers
 function SearchContainer() {
     //use state to save query results
     const [searchQuery, setSearchQuery] = useState(''); 
@@ -16,10 +17,15 @@ function SearchContainer() {
                     headers: {'Content-Type': 'application/json'},
                     withCredentials: true
                 })
-                //must update searchResults array with the results of api call
+                //must update searchResults array with the results of api call, but for now we console.log
+                console.log('Sending search request to backend....');
         }
-        catch{
-
+        catch (err) {
+            if(err.reponse){
+                setErrMsg('Search Failed')
+            }else if(err.reponse?.status === 400) {
+                setErrMsg('No teachers with that zip code found')
+              } 
 
         }
     }
@@ -31,6 +37,10 @@ function SearchContainer() {
     }
     //will render both the search bar and search result component on this page
     return ( 
+        <div className ='search-container'>
+            <SearchBar />
+
+        </div>
 
      );
 }

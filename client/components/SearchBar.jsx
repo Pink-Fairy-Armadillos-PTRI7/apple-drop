@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from 'react-router-dom';
 
-function SearchBar () {
-    const [searchQuery, setSearchQuery] = useState('');
+
+function SearchBar (props) {
     return ( 
         <form>
             <TextField id="outlined-search"
                 label="Search by zipcode"
-                variant = 'outlined'
+                variant = 'filled'
                 placeholder='ex. 33063'
                 type="search"
                 size= 'small'
