@@ -10,6 +10,9 @@ const PORT = 3000;
 const app = express();
 
 
+//middlewares
+app.use(cors());
+
 
 
 app.use(express.json());
@@ -26,6 +29,7 @@ app.use((req, res) => res.sendStatus(404));
 
 
 app.use((err, req, res, next) => {
+  console.log(err);
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
