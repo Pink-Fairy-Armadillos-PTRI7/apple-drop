@@ -33,7 +33,7 @@ const Navbar = ({ theme }) => {
     //create state to figure out if user is signed in or not
     const [showSignUp, setShowSignUp] = useState(false);
     const [showSignIn, setShowSignIn] = useState(false);
-    const [user, setUser] = useState('Mike')
+    const [user, setUser] = useState('')
     //pass these down to the register and the login in components in order to reassign the isSigned boolean accordingly
     //theme is an object which contains breakpoints, keys that reference the size of screens, etc
     console.log('theme is =>', theme);
