@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
   schoolName: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
   street: { type: String, required: true },
   city: { type: String, required: true },
+  state: { type: String, required: true },
   postalCode: { type: String, required: true },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
-    unique: true
-  }
+    unique: true,
+  },
 });
 
-
-
-module.exports = mongoose.model("Address", addressSchema);
+module.exports = mongoose.model('Address', addressSchema);
