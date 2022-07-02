@@ -7,13 +7,6 @@ import { Button, Container, Box, Tabs, Tab} from '@mui/material';
 const Home = () => {
   return (
     <div>
-      <Button variant='contained' sx={{
-        borderRadius: 4,
-        boxShadow: 3,
-        background: '#FEE440',
-        color: '#9e9e9e', 
-        height: 100
-      }}>Register</Button>
       <div className='homepage-container'>
         <Box className='homepage-picture' sx={{
           width: 1/3
