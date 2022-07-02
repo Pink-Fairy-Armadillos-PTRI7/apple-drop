@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../style.css';
-import { Button, Container, Box } from '@mui/material';
-import { border, borderBottom, fontFamily } from '@mui/system';
+import { Button, Container, Box, Tabs, Tab} from '@mui/material';
+// import { border, borderBottom, fontFamily } from '@mui/system';
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ const Home = () => {
         }}/>
         <Box className='homepage-text' sx={{
           width: 2/3, 
-          height: '50vh'  
+          // minHeight: '50vh' 
         }}>
           <h1>Teachers could use more than just apples. 
             <span className='highlight'> They need our help.</span>
@@ -35,13 +35,19 @@ const Home = () => {
           }}>Find a List</Button>
         </Box>
       </div>
-          <Box className='how-it-works'
+          <Box className='how-it-works-header'
             sx={{ 
-              height: 150,
               borderBottom: 1,
               background: '#f6f2ef',
-            }}>
-              <h2><b>How it works</b></h2>
+            }}><h1>How it works</h1>
+                <Box className='how-it-works-subheader'>
+                  <Tabs centered>
+                    <Tab label='For Donors' value='donors'/>
+                    <Tab label='For Teachers' value='teachers'/>
+                  </Tabs>
+                </Box>
+              
+                
             </Box>
       <div>
 

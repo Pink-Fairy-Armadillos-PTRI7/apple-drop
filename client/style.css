@@ -32,13 +32,17 @@ p {
 .homepage-text {
   display: flex;
   flex-direction: column;
+  min-height: 50vh;
+  flex-wrap: wrap;
   color: #fff;
   max-width: 34rem;
   margin: 3rem 5rem;
+  flex: 0 1 auto; 
 }
 
 .highlight {
   color: #FF865E;
+  text-shadow: 1px 1px #954c33;
 }
 
 .homepage-text button {
@@ -47,4 +51,17 @@ p {
 
 .homepage-text button:hover {
   background-color: #fff;
+}
+
+.how-it-works-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 50px;
+  min-height: 350px;
+}
+.how-it-works-subheader {
+  display: flex;
+  gap: 100px;
+
 }
