@@ -1,28 +1,11 @@
 import React, { useState, useEffect, useRef} from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuList from '@mui/material/MenuList';
-
-
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb'
-import { Link } from 'react-router-dom';
 import DrawerComp from './DrawerComp.jsx';
-
-const pages = ['Apple Drop', 'Donate to a teacher', 'Register']
-const settings = ['Profile', 'Logout']
-
 
 const Navbar = () =>{
     //implement conditional rendering that checks if a user is registered or not
