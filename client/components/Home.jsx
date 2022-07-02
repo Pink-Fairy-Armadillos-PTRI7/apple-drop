@@ -4,7 +4,7 @@ import '../style.css';
 import { Button, Container, Box, Tabs, Tab} from '@mui/material';
 // import { border, borderBottom, fontFamily } from '@mui/system';
 
-const Home = () => {
+const Home = ({ theme }) => {
   return (
     <div>
       <div className='homepage-container'>
