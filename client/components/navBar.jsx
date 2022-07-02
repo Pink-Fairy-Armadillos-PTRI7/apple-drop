@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import DrawerComp from './DrawerComp.jsx';
+import { Link } from 'react-router-dom';
 
 const Navbar = () =>{
     //implement conditional rendering that checks if a user is registered or not
@@ -33,8 +34,18 @@ const Navbar = () =>{
                         ) : (
                             <>
                                 <Typography variant="h8">Apple Drop</Typography>
-                                 <Button sx ={{marginLeft: "auto", background: "#FEE440"}} variant="contained">Sign Up</Button>
-                                <Button sx ={{marginLeft: "10px", background: "#FEE440"}} variant="contained">Donate to teachers</Button>
+                                 <Button sx ={{marginLeft: "auto", background: "#FEE440"}} 
+                                    variant="contained"
+                                    component={Link} to = '/signup'
+                                >
+                                    Sign Up
+                                </Button>
+                                <Button sx ={{marginLeft: "10px", background: "#FEE440"}} 
+                                    variant="contained"
+                                    component={Link} to = '/search'
+                                >
+                                    Donate to teachers
+                                </Button>
                             </>
                         )
                     }
