@@ -6,7 +6,7 @@ const addressSchema = new Schema({
   street: { type: String, required: true },
   city: { type: String, required: true },
   postalCode: { type: String, required: true },
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
