@@ -11,11 +11,13 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/sign-up" element={/*<ExampleComponent />*/ <p></p>} />
+        <Route path="/sign-in" element={/*<ExampleComponent />*/ <p></p>} />
         <Route exact path='/' element={<Home />} />
         <Route exact path='/search' element={<SearchContainer />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
 export default App;
