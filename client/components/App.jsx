@@ -13,7 +13,7 @@ const App = () => {
         <Route exact path='/' element={<Home theme={theme} />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
 export default App;
