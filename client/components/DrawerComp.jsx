@@ -3,26 +3,32 @@ import {Drawer, IconButton, List, ListItemButton, ListItemText } from "@mui/mate
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 //import drawer component after the toolbar component in nav
-function DrawerComp () {
+function DrawerComp ({ setShowSignIn, user }) {
     //list composed of items containing primary and supplemental actions, represented by icons and text
     const [openDrawer, setOpenDrawer] = useState(false)
-    const pages = ['Register', 'Donate to Teachers']
+    const pages = ['Sign in / Sign Up', 'Donate to Teachers']
+
     return ( 
         <>
          <Drawer open={openDrawer} onClose = {() => setOpenDrawer(false)}>
             <List>
                 {
-                   pages.map((page, index) => {
-                    let componentPath
-                     (index === 1)? componentPath = '/search' : componentPath = '/signup'
-                        return (
-                            <ListItemButton key={index} 
-                            component={Link} to={componentPath}
-                            >
-                            <ListItemText>{page}</ListItemText>
+                    pages.map((page, index) => (
+                        (index === 1) ? (
+                            // Donate
+                            <ListItemButton key={index} component={Link} to={'/search'}>
+                                <ListItemText onClick ={() => setOpenDrawer(!openDrawer)}>{page}</ListItemText>
                             </ListItemButton>
+                        ) : (
+                            // Sign in / Sign up
+                            user ?
+                              null : (
+                              <ListItemButton key={index}>
+                                  <ListItemText onClick={() => { setShowSignIn(true); setOpenDrawer(!openDrawer) }}>{page}</ListItemText>
+                              </ListItemButton>
+                            )
                         )
-                    })
+                    ))
                 }
             </List>
         </Drawer>
