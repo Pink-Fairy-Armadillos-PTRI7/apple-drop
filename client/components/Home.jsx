@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../style.css';
 import { Button, Container, Box, Tabs, Tab} from '@mui/material';
+import SearchBar from './SearchBar.jsx';
 // import { border, borderBottom, fontFamily } from '@mui/system';
 
-const Home = ({ theme }) => {
+const Home = () => {
   return (
     <div>
       <div className='homepage-container'>
@@ -19,13 +20,14 @@ const Home = ({ theme }) => {
             <span className='highlight'> They need our help.</span>
           </h1>
           <p>Deliver classroom supplies to teachers in need, locally or across the country. Make an impact on a student's learning journey today.</p>
-          <Button variant='contained' size="large" sx={{
+          {/* <Button variant='contained' size="large" sx={{
             borderRadius: 4,
             boxShadow: 3,
             background: '#FEE440',
             color: '#9e9e9e', 
             marginTop: '50px'
-          }}>Find a List</Button>
+          }}>Find a List</Button> */}
+          <SearchBar />
         </Box>
       </div>
           <Box className='how-it-works-header'

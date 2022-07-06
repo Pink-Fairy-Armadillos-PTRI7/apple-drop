@@ -1,32 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuList from '@mui/material/MenuList';
-import ListItemText from '@mui/material/ListItemText';
-
-
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb'
-import { Link } from 'react-router-dom';
 import DrawerComp from './DrawerComp.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
-
-// Todo: Remove?
-// const pages = ['Apple Drop', 'Donate to a teacher', 'Sign in / Sign up']
-// const settings = ['Profile', 'Logout']
-
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ theme }) => {
     //implement conditional rendering that checks if a user is registered or not
@@ -68,7 +49,12 @@ const Navbar = ({ theme }) => {
                                     </Button>
                                     </>
                                 )}
-                                <Button sx ={{marginLeft: '10px', background: '#FEE440'}} variant='contained'>Donate to teachers</Button>
+                                <Button sx ={{marginLeft: "10px", background: "#FEE440"}} 
+                                    variant="contained"
+                                    component={Link} to = '/search'
+                                >
+                                    Donate to teachers
+                                </Button>
                             </>
                         )
                     }
