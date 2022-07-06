@@ -5,13 +5,16 @@ const upload = require('../middlewares/uploadHandler');
 
 const router = Router();
 
+router.post('/list/:id', auth, listController.createList, (req, res) => {
+  return res.status(200).json({ status: 'lets see' });
+});
 router.post(
-  '/list/:id',
+  '/list/upload/:id',
   auth,
-  upload.single('image'),
-  listController.createList,
+  upload.array('image'),
+  listController.uploadListImages,
   (req, res) => {
-    return res.status(200).json({ status: 'lets see' });
+    return res.status(200).json(res.locals.images);
   }
 );
 
