@@ -10,7 +10,10 @@ const App = () => {
     <Router>
       <Navbar theme={theme} />
       <Routes>
-        <Route exact path='/' element={<Home theme={theme} />} />
+        <Route path="/sign-up" element={/*<ExampleComponent />*/ <p></p>} />
+        <Route path="/sign-in" element={/*<ExampleComponent />*/ <p></p>} />
+        {/* <Route exact path="/" element={<p>Hello, World!</p>} /> */}
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </Router>
   );
