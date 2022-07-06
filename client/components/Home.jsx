@@ -1,10 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../style.css';
 import { Button, Container, Box, Tabs, Tab, Card, CardContent} from '@mui/material';
 import Typography from "@mui/material/Typography";
-// import { border, borderBottom, fontFamily } from '@mui/system';
-import shopList from '../assets/cart.svg';
+import SearchBar from './SearchBar.jsx';
 import profile from '../assets/profile.svg';
 import story from '../assets/story.svg';
 import wishlist from '../assets/wishlist.svg';
@@ -50,20 +48,20 @@ const Home = () => {
           width: 1/3
         }}/>
         <Box className='homepage-text' sx={{
-          width: 2/3, 
-          // minHeight: '50vh' 
+          width: 2/3
         }}>
           <h1>Teachers could use more than just apples. 
             <span className='highlight'> They need our help.</span>
           </h1>
           <p>Deliver classroom supplies to teachers in need, locally or across the country. Make an impact on a student's learning journey today.</p>
-          <Button variant='contained' size="large" sx={{
+          {/* <Button variant='contained' size="large" sx={{
             borderRadius: 4,
             boxShadow: 3,
             background: '#FEE440',
             color: '#9e9e9e', 
             marginTop: '50px'
-          }}>Find a List</Button>
+          }}>Find a List</Button> */}
+          <SearchBar className='home-search'/>
         </Box>
       </div>
         <Box className='how-it-works-header'

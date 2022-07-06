@@ -48,7 +48,7 @@ p {
   max-width: 20rem;
 }
 
-.homepage-text button:hover {
+.home-search :hover {
   background-color: #fff;
 }
 
