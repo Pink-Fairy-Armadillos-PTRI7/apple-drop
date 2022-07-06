@@ -83,6 +83,14 @@ p {
 }
 
 .testimonials {
-  min-height: 400px;
+  min-height: 600px;
+  text-align: center;
+}
+
+.testimonial-cards {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  gap: 150px;
 }
 

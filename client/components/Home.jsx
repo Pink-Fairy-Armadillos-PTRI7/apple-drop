@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../style.css';
-import { Button, Container, Box, Tabs, Tab} from '@mui/material';
+import { Button, Container, Box, Tabs, Tab, Card, CardContent} from '@mui/material';
 import Typography from "@mui/material/Typography";
 // import { border, borderBottom, fontFamily } from '@mui/system';
 import shopList from '../assets/cart.svg';
@@ -125,7 +125,43 @@ const Home = () => {
             </Box>
             <div><hr /></div>
             <Box className='testimonials'>
-              HELLO THIS IS TESTIMONIAL BOX
+              <h1> What users are saying about us</h1>
+              <div className='testimonial-cards'>
+                <Card sx={{
+                    width: 400,
+                    minHeight: 300
+                  }}>
+                  <CardContent>
+                    <Typography variant='body1' color='text.secondary' gutterBottom>
+                      "Wow the color palette is a 10000. Talk about surprise! I received millions of donations in my first DAY! I tried to stop them after 5000 crayons but they kept coming. I am now donating the resources I've gotten to other teachers in need. Can you make a website for gaming supplies as well? My son LOVES to spend all of his time and money on games. It would be nice to get millions of games for free as well!"
+                    </Typography>
+                    <Typography variant='h5' align='right'>- Ethan M.</Typography>
+                  </CardContent>
+                </Card>
+                <Card sx={{
+                    width: 400,
+                    minHeight: 300
+                  }}>
+                  <CardContent sx={{position: 'relative'}}>
+                    <Typography variant='body1' color='text.secondary' gutterBottom>
+                      "Thanks to this website, I am now able to keep my classroom fully stocked with extra supplies for years to come. I am even able to send home extra to my students in need, to make sure their siblings and friends can benefit as well. I’m so thankful for the generosity of our donors.
+                      Thanks AppleDrop!"
+                    </Typography>
+                    <Typography variant='h5' align='right' sx={{marginBottom: 0}}>- Imma D.</Typography>
+                  </CardContent>
+                </Card>
+                <Card sx={{
+                    width: 400,
+                    minHeight: 300
+                  }}>
+                  <CardContent>
+                  <Typography variant='body1' color='text.secondary' gutterBottom>
+                    "I love using Apple Drop! It's so easy to navigate and the ability to create custom lists as a teacher OR link your Amazon wishlist is amazing! Now I can reach a wider audience and receive supplies for my students faster than ever! The process for donating and purchasing items from lists is also soooo intuitive - No need to sign up for an account. This is brilliant!"
+                  </Typography>
+                  <Typography variant='h5' align='right' sx={{marginBottom: 0}}>- Wilson T.</Typography>
+                  </CardContent>
+                </Card>
+              </div>
             </Box>
               
           </Box>
