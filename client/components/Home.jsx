@@ -5,7 +5,6 @@ import { Button, Container, Box, Tabs, Tab} from '@mui/material';
 import SearchBar from './SearchBar.jsx';
 // import { border, borderBottom, fontFamily } from '@mui/system';
 
-
 const Home = () => {
   return (
     <div>
