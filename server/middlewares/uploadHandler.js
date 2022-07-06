@@ -20,7 +20,6 @@ const storage = multerS3({
   bucket: process.env.AWS_BUCKET_NAME,
 
   key: (req, file, cb) => {
-    console.log(file, 'heeererrerrerererererererrerrerere');
     cb(null, uuid.v4() + path.extname(file.originalname));
   },
 });

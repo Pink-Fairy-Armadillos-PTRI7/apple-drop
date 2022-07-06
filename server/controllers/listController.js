@@ -6,7 +6,7 @@ const teacherList = {};
 
 teacherList.uploadListImages = async (req, res, next) => {
   try {
-    await req.files;
+    console.log(req.files, 'filesss');
 
     const locations = req?.files.map((file) => {
       console.log(file);

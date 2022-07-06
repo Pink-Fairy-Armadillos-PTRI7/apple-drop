@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import mapper from '../lib/mapImageUrlToObj.js';
+import React, { useState, useEffect } from 'react';
+// import mapper from '../lib/mapper.js';
 
 const listItem = {};
 
 function TestApp() {
   const [list, setList] = useState([]);
+  const [imgUrls, setImgUrls] = useState([]);
 
   const formData = new FormData();
 
   const beforeUpload = async (e) => {
     e.preventDefault();
+
+    for (const [key, value] of formData) {
+      console.log(key, value);
+    }
 
     const data = await fetch('/api/list/upload/62c4c0be9d30e99a23cbb26f', {
       method: 'POST',
@@ -19,13 +24,31 @@ function TestApp() {
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MDYxNTY3LCJleHAiOjE2NTcxNDc5Njd9.OhbwlQIuRj0I2Ox5l3fVA3LvrXo8vrYI4Zc2IWI_5mc',
       },
     }).then((res) => res.json());
-    console.log(data, 'line 21!!!');
 
-    const newList = mapper(data, list);
-    console.log(newList, 'line 25');
+    setImgUrls(data);
   };
 
   const handleUpload = () => {};
+
+  // const mapper = (data, list) => {
+  //   console.log(data, 'hiiiii');
+  //   if (data.length) {
+  //     return list.map((item, index) => {
+  //       const location = data.find(
+  //         (file) => file.name === item.image.name
+  //       ).location;
+
+  //       item.image = location;
+  //       return item;
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    console.log(imgUrls);
+    // console.log(mapper(imgUrls, list));
+  }, [imgUrls]);
+
   return (
     <>
       <form>
