@@ -31,7 +31,7 @@ import SignIn from './SignIn.jsx';
 const Navbar = ({ theme }) => {
     //implement conditional rendering that checks if a user is registered or not
     //create state to figure out if user is signed in or not
-    const [showSignUp, setShowSignUp] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(true);
     const [showSignIn, setShowSignIn] = useState(false);
     const [user, setUser] = useState('')
     //pass these down to the register and the login in components in order to reassign the isSigned boolean accordingly

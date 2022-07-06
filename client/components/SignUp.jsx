@@ -1,16 +1,11 @@
-
-// TODO: ADD 'PREFIX' TO SIGNUP: [Mr, Mrs, Ms, Mx]
-
-//
-
-//
-
-//
-
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -19,13 +14,34 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 
 const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
+  // State
+  const [prefix, setPrefix] = useState('');
+
+  // Functions
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // Send request to server
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: data.get('email'),
+        password: data.get('password'),
+        firstName: data.get('firstName'),
+        lastName: data.get('lastName'),
+        prefix,
+        schoolName: data.get('schoolName'),
+        phoneNumber: data.get('phone'),
+        street: data.get('street'),
+        city: data.get('city'),
+        state: data.get('state'),
+        postalCode: data.get('postalCode')
+      })
+    }).then(response => response.json()).then(result => console.log(result)).catch(e => console.log(e));
+    closePopup();
   };
 
   const closePopup = () => setShowSignUp(false);
@@ -52,7 +68,7 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>Personal</h3>
+                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>Personal Info</h3>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -76,6 +92,22 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
                     name="lastName"
                     autoComplete="family-name"
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputLabel id="prefix-label">Prefix</InputLabel>
+                  <Select
+                    sx={{ background: theme.palette.blueCream.light, width: '100%' }}
+                    labelId="prefix-label"
+                    id="prefix"
+                    value={prefix}
+                    label="Prefix"
+                    onChange={(e) => setPrefix(e.target.value)}
+                  >
+                    <MenuItem value='Ms.'>Ms.</MenuItem>
+                    <MenuItem value='Mrs.'>Mrs.</MenuItem>
+                    <MenuItem value='Mr.'>Mr.</MenuItem>
+                    <MenuItem value='Mx.'>Mx.</MenuItem>
+                  </Select>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -169,12 +201,6 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
                     id="postalCode"
                   />
                 </Grid>
-                {/* <Grid item xs={12}>
-                  <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="I want to receive inspiration, marketing promotions and updates via email."
-                  />
-                </Grid> */}
               </Grid>
               <Button
                 color="orange"
@@ -182,7 +208,6 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={() => closePopup()}
               >
                 Sign Up
               </Button>
