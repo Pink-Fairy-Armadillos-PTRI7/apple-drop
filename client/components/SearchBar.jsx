@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { TextField, IconButton } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
 function SearchBar (props) {
     return ( 
-        <form>
+        <form style = {{display: 'flex'}}>
             <TextField id="outlined-search"
                 label="Search by zipcode"
                 variant = 'filled'
@@ -15,15 +15,12 @@ function SearchBar (props) {
                 size= 'small'
                 onInput = {(e) => setSearchQuery(e.target.value)}
             />
-            <IconButton
-                type='submit'
-                aria-label='search'
-                size ="large"
-            >
-            <SearchIcon 
-                sx={{fill: "#A2D2FF"}}
-             ></SearchIcon>
-            </IconButton>
+            <Button sx ={{marginLeft: "10px", background: "#FEE440"}} 
+            variant="contained"
+                component={Link} to = '/search'
+                 >
+                Search
+             </Button>
         </form>
      );
 }
