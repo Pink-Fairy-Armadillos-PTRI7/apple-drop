@@ -9,10 +9,13 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
-        <Route exact path='/' element={<Home />} />
+        <Route path="/sign-up" element={/*<ExampleComponent />*/ <p></p>} />
+        <Route path="/sign-in" element={/*<ExampleComponent />*/ <p></p>} />
+        {/* <Route exact path="/" element={<p>Hello, World!</p>} /> */}
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
 export default App;
