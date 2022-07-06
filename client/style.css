@@ -65,3 +65,11 @@ p {
   gap: 100px;
 
 }
+/* TEACHER DASHBOARD STYLING */
+.teacherDash-img {
+  background-image: url(https://source.unsplash.com/hXLkFpvKRys);
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
