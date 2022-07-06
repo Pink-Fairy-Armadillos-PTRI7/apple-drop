@@ -19,10 +19,10 @@ function TestApp() {
     const data = await fetch('/api/list/upload/62c4c0be9d30e99a23cbb26f', {
       method: 'POST',
       body: formData,
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MDYxNTY3LCJleHAiOjE2NTcxNDc5Njd9.OhbwlQIuRj0I2Ox5l3fVA3LvrXo8vrYI4Zc2IWI_5mc',
-      },
+      // headers: {
+      //   Authorization:
+      //     'Bearer ${add token from sign up or sign in}
+      // },
     }).then((res) => res.json());
 
     setImgUrls(data);
