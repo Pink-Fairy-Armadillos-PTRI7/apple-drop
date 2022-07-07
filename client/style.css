@@ -94,15 +94,18 @@ p {
   gap: 150px;
 }
 
-<<<<<<< HEAD
-}
+
 /* TEACHER DASHBOARD STYLING */
+.teacherDash-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} 
+
 .teacherDash-img {
   background-image: url(https://source.unsplash.com/hXLkFpvKRys);
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-=======
->>>>>>> dev
