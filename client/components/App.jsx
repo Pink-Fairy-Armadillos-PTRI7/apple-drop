@@ -4,16 +4,15 @@ import '../style.css';
 import theme from './theme';
 import Navbar from './navBar.jsx';
 import Home from './Home.jsx';
+import Test from './AppTest.jsx';
 
 const App = () => {
   return (
     <Router>
       <Navbar theme={theme} />
       <Routes>
-        <Route path="/sign-up" element={/*<ExampleComponent />*/ <p></p>} />
-        <Route path="/sign-in" element={/*<ExampleComponent />*/ <p></p>} />
-        {/* <Route exact path="/" element={<p>Hello, World!</p>} /> */}
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home theme={theme} />} />
+        <Route exact path="/test" element={<Test />} />
       </Routes>
     </Router>
   );
