@@ -101,6 +101,11 @@ p {
   flex-direction: column;
   width: 100%;
 } 
+.teacher-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
 .teacherDash-img {
   background-image: url(https://source.unsplash.com/hXLkFpvKRys);
