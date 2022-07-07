@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const constants = require('../utils/constants.js'); // => createError()
 
 const userSchema = new Schema({
+  prefix: { type: String, enum: ['Ms.', 'Mrs.', 'Mr.', 'Mx'] },
   email: { type: String, required: true, unique: true },
   prefix: {type: String, required: true}, 
   password: { type: String, required: true },
@@ -15,17 +16,16 @@ const userSchema = new Schema({
   address: {
     type: Schema.Types.ObjectId,
     ref: 'Address',
-  }
+  },
 });
 
 userSchema.pre('save', function (next) {
   bcrypt.hash(this.password, SALT_WORK_FACTOR, (err, hash) => {
-    if (err) return next(constants.createError({message: {err: err.message}}));
+    if (err)
+      return next(constants.createError({ message: { err: err.message } }));
     this.password = hash;
     return next();
   });
 });
-  
-
 
 module.exports = mongoose.model('User', userSchema);
