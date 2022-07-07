@@ -17,10 +17,10 @@ const Navbar = ({ theme }) => {
     const [user, setUser] = useState('')
     //pass these down to the register and the login in components in order to reassign the isSigned boolean accordingly
     //theme is an object which contains breakpoints, keys that reference the size of screens, etc
-    console.log('theme is =>', theme);
+    // console.log('theme is =>', theme);
     //md represents 960px, so mobileView checks to see if the current screen size is btw 0 and 960px and returns a boolean
     const mobileView = useMediaQuery(theme.breakpoints.down('md'));
-    console.log('match is => ', mobileView);
+    // console.log('match is => ', mobileView);
     return (
         <>
         {/* using nav tag for accessibility reasons */}

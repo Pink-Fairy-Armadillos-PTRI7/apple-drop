@@ -18,8 +18,8 @@ const s3 = new AWS.S3();
 const storage = multerS3({
   s3,
   bucket: process.env.AWS_BUCKET_NAME,
-
   key: (req, file, cb) => {
+    // console.log('file at upload --->', file)
     cb(null, uuid.v4() + path.extname(file.originalname));
   },
 });

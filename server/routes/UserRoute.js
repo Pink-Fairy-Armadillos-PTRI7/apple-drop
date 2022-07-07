@@ -5,7 +5,7 @@ const auth = require('../middlewares/Authorization');
 const router = Router();
 
 router.get('/users', userController.getAllUser, (req, res) => {
-  return res.status(200).json(reres.locals.users);
+  return res.status(200).json(res.locals.users);
 });
 
 router.get('/user/:id', auth, userController.getUserProfile, (req, res) => {

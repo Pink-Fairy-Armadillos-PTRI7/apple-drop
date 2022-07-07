@@ -5,12 +5,16 @@ require('dotenv').config();
 const teacherList = {};
 
 teacherList.uploadListImages = async (req, res, next) => {
-  try {
-    console.log(req.files, 'filesss');
 
-    const locations = req?.files.map((file) => {
-      console.log(file);
-      return { location: file?.location, name: file.originalname };
+  try {
+    if (!req.body.title && !req.body.description) {
+      return next();
+    }
+    if (Array.isArray(req.body.title) && Array.isArray(req.body.description)) {
+      return next();
+    }
+    const locations = req?.files.map((file, index) => {
+      return { title: req.body.title[index], description: req.body.description[index], location: file?.location, name: file.originalname };
     });
     res.locals.images = locations;
     return next();
