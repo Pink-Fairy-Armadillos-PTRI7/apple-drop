@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
 
-
 body {
   margin: 0;
   font-family: 'Manrope', sans-serif;
@@ -49,7 +48,7 @@ p {
   max-width: 20rem;
 }
 
-.homepage-text button:hover {
+.home-search :hover {
   background-color: #fff;
 }
 
@@ -59,11 +58,43 @@ p {
   align-items: center;
   padding-left: 50px;
   min-height: 350px;
+  background-color: #FEF9EF;
 }
+
 .how-it-works-subheader {
   display: flex;
-  gap: 100px;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.panel {
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
+.tab-img {
+  height: 200px;
+  width: 200px;
+}
+
+.tab-text {
+  text-align: center;
+}
+
+.testimonials {
+  min-height: 600px;
+  text-align: center;
+}
+
+.testimonial-cards {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  gap: 150px;
+}
+
+<<<<<<< HEAD
 }
 /* TEACHER DASHBOARD STYLING */
 .teacherDash-img {
@@ -73,3 +104,5 @@ p {
   background-size: cover;
   background-position: center;
 }
+=======
+>>>>>>> dev
