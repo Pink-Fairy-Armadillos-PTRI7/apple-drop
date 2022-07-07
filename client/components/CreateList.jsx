@@ -57,6 +57,16 @@ const CreateList = ({ theme }) => {
           <Typography component="h1" variant="h2">
             Create a List
           </Typography>
+          <TextField
+            sx={{ border: 0 }}
+            margin="normal"
+            required
+            fullWidth
+            id="listName"
+            label="List Name"
+            name="listName"
+            autoFocus
+          />
           <Box component="form" onSubmit={addRow} noValidate sx={{ mt: 1, width: '100%' }}>
             <Grid container sx={{ width: 300, alignItems: 'center', justifyContent: 'center', display: 'flex', m: 'auto' }}>
               <TextField
@@ -67,7 +77,6 @@ const CreateList = ({ theme }) => {
                 id="itemName"
                 label="Item Name"
                 name="itemName"
-                autoFocus
               />
               <TextField
                 sx={{ background: theme.palette.blueCream.light }}
