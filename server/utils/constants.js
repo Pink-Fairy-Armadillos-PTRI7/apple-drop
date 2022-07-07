@@ -27,6 +27,7 @@ const validateFields = (fields, mode, update) => {
     ],
     login: ['email', 'password'],
     story: ['title', 'description'],
+    listItem: ['title', 'description'],
   };
 
   return update

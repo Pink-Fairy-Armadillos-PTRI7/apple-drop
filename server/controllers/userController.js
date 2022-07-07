@@ -132,7 +132,7 @@ userController.updateUserProfile = async (req, res, next) => {
   try {
     const isValid = constants.validateFields(req.body, 'signup', 'update');
     if (isValid) {
-      body = { ...req.body };
+      const body = { ...req.body };
       await User.findOneAndUpdate({ _id: req.params.id }, body);
       return next();
     }
@@ -140,7 +140,7 @@ userController.updateUserProfile = async (req, res, next) => {
     return next(constants.createError({ message: { err: error.message } }));
   }
 };
-// Delete User Profile
+
 
 userController.deleteProfile = async (req, res, next) => {
   try {
