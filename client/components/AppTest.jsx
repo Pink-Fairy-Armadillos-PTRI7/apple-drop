@@ -10,25 +10,26 @@ function TestApp() {
   const formData = new FormData();
 
   const beforeUpload = async (e) => {
-    e.preventDefault();
-
+   e.preventDefault()
     for (const [key, value] of formData) {
-      console.log(key, value);
+      console.log('key', key, ' value ' , value);
     }
-
-    const data = await fetch('/api/list/upload/62c4c0be9d30e99a23cbb26f', {
+    const data = await fetch('/api/list/upload/62c632dacdbe83fa03518f70', {
       method: 'POST',
       body: formData,
-      // headers: {
-      //   Authorization:
-      //     'Bearer ${add token from sign up or sign in}
-      // },
+      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        Authorization:
+          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM2MzJkYWNkYmU4M2ZhMDM1MThmNzAiLCJlbWFpbCI6ImFubmFAZGV2LmNvbSIsImlhdCI6MTY1NzE1NjMxNiwiZXhwIjoxNjU3MjQyNzE2fQ.c58o7emX2jLWVMpaxZNMAzGpdqpyDNwqr2_LQ2Kb70Y`
+      },
     }).then((res) => res.json());
-
+    console.log('data--->', data)
     setImgUrls(data);
   };
 
-  const handleUpload = () => {};
+
+
+  const handleUpload = () => { };
 
   // const mapper = (data, list) => {
   //   console.log(data, 'hiiiii');
@@ -51,7 +52,7 @@ function TestApp() {
 
   return (
     <>
-      <form>
+      <form onSubmit={beforeUpload}>
         {[...Array(4)].map((_, index) => {
           return (
             <div className="listItem" key={index + 24}>
@@ -83,7 +84,7 @@ function TestApp() {
             </div>
           );
         })}
-        <button type="submit" onClick={beforeUpload}>
+        <button type="submit" >
           submit
         </button>
       </form>
