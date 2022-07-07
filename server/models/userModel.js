@@ -9,7 +9,6 @@ const constants = require('../utils/constants.js'); // => createError()
 const userSchema = new Schema({
   prefix: { type: String, enum: ['Ms.', 'Mrs.', 'Mr.', 'Mx'] },
   email: { type: String, required: true, unique: true },
-  prefix: {type: String, required: true}, 
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
