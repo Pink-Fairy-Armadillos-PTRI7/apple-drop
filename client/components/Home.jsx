@@ -13,7 +13,7 @@ import checkout from '../assets/checkout.svg';
 import celebrate from '../assets/celebrate.svg';
 
 
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
