@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Tabs, Tab } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import Typography from "@mui/material/Typography";
 import axios from 'axios';
 
-function TabPanel  () {
+function TabPanel (props) {
+    //children passes the string text btw TabPanel, value and index makes sure we only render the children info when user clicks on that tab
+    const {children, value, index, ...other } = props
     return (
-        <div>
-            <h1> Tab info </h1>
+        <div
+            role='tabpanel'
+            hidden={value !== index}
+            id={`vertical-tabpanel-${index}`}
+            aria-labelledby={`vertical-tab-${index}`}
+            {...other}
+        >
+         {value === index && (
+            <Box sx={{ p: 3 }}>
+                <Typography>{children}</Typography>
+            </Box>
+        )}
         </div>
     )
 }
@@ -39,7 +52,8 @@ function TeacherDash ({theme}) {
                             <Tab label = 'All'/>
                             <Tab label = 'Drafts'/>
                         </Tabs>
-                        <TabPanel />
+                        <TabPanel value = {value} index = {0}> Deez Nutz </TabPanel>
+                        <TabPanel value = {value} index = {1}> Goteem</TabPanel>
                     </Box>
                     <Box className ='teacher-column' id = 'teacher-story'>
                         <h3 style ={{color: theme.palette.orange.main}} >Your Story</h3>
