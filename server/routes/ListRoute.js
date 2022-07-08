@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const listController = require('../controllers/listController');
 const auth = require('../middlewares/Authorization');
-const upload = require('../middlewares/uploadHandler');
 
 const router = Router();
 
