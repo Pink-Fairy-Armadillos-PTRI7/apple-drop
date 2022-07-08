@@ -3,6 +3,7 @@ const path = require('path');
 
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const startDb = require('./database/db.js');
 
 const authRouter = require('./routes/AuthRoute.js');
@@ -17,6 +18,9 @@ const app = express();
 //middlewares
 app.use(cookieParser());
 app.use(cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
 

@@ -39,7 +39,7 @@ function TestApp() {
 
   return (
     <>
-      <form>
+      <form onSubmit={beforeUpload}>
         {[...Array(4)].map((_, index) => {
           return (
             <div className="listItem" key={index + 24}>
@@ -74,9 +74,7 @@ function TestApp() {
             </div>
           );
         })}
-        <button type="submit" onClick={beforeUpload}>
-          submit
-        </button>
+        <button type="submit">submit</button>
       </form>
     </>
   );

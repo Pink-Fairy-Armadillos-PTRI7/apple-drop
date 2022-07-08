@@ -12,15 +12,15 @@ import { Link } from 'react-router-dom';
 const Navbar = ({ theme }) => {
     //implement conditional rendering that checks if a user is registered or not
     //create state to figure out if user is signed in or not
-    const [showSignUp, setShowSignUp] = useState(true);
+    const [showSignUp, setShowSignUp] = useState(false);
     const [showSignIn, setShowSignIn] = useState(false);
     const [user, setUser] = useState('')
     //pass these down to the register and the login in components in order to reassign the isSigned boolean accordingly
     //theme is an object which contains breakpoints, keys that reference the size of screens, etc
-    console.log('theme is =>', theme);
+    // console.log('theme is =>', theme);
     //md represents 960px, so mobileView checks to see if the current screen size is btw 0 and 960px and returns a boolean
     const mobileView = useMediaQuery(theme.breakpoints.down('md'));
-    console.log('match is => ', mobileView);
+    // console.log('match is => ', mobileView);
     return (
         <>
         {/* using nav tag for accessibility reasons */}
