@@ -34,10 +34,10 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
   const switchToSignIn = () => setShowSignUp(true);
 
   return (
-    <div style={{ top: 0, position: 'fixed', zIndex: 1, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ top: 0, position: 'fixed', zIndex: 100, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div onClick={closePopup} style={{ width: '100%', height: '100vh', backgroundColor: 'rgb(0, 0, 0, .65)' }}></div>
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ position: 'fixed', zIndex: 2, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
+        <Container component="main" maxWidth="xs" sx={{ position: 'fixed', zIndex: 200, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -88,12 +88,12 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2" sx={{ color: theme.palette.orange.light, textDecorationColor: theme.palette.orange.light, cursor: 'pointer' }}>
+                  <Link href="#" variant="body2" sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }}>
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link onClick={() => { closePopup(); switchToSignIn(); }} variant="body2" sx={{ color: theme.palette.orange.light, textDecorationColor: theme.palette.orange.light, cursor: 'pointer' }}>
+                  <Link onClick={() => { closePopup(); switchToSignIn(); }} variant="body2" sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }}>
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>

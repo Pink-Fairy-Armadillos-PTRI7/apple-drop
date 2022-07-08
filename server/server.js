@@ -3,12 +3,14 @@ const path = require('path');
 
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const startDb = require('./database/db.js');
 
 const authRouter = require('./routes/AuthRoute.js');
 const listRouter = require('./routes/ListRoute.js');
 const storyRouter = require('./routes/StoryRoute.js');
 const userRouter = require('./routes/UserRoute.js');
+const uploadRouter = require('./routes/uploadRoute.js');
 
 const PORT = 3000;
 const app = express();
@@ -16,6 +18,9 @@ const app = express();
 //middlewares
 app.use(cookieParser());
 app.use(cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
 
@@ -25,6 +30,7 @@ app.use('/api', authRouter);
 app.use('/api', listRouter);
 app.use('/api', storyRouter);
 app.use('/api', userRouter);
+app.use('/api', uploadRouter);
 
 app.use((req, res) => res.sendStatus(404));
 

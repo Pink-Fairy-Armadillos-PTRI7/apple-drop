@@ -11,6 +11,7 @@ const userController = {};
 userController.signUp = async (req, res, next) => {
   try {
     const {
+      prefix,
       email,
       password,
       firstName,
@@ -21,6 +22,7 @@ userController.signUp = async (req, res, next) => {
       city,
       state,
       postalCode,
+     
     } = req.body;
 
     const isValid = constants.validateFields(req.body, 'signup');
@@ -33,7 +35,7 @@ userController.signUp = async (req, res, next) => {
         })
       );
 
-    let user = new User({ email, password, firstName, lastName });
+    let user = new User({ email, password,prefix, firstName, lastName });
 
     await user.save();
 
@@ -130,7 +132,7 @@ userController.updateUserProfile = async (req, res, next) => {
   try {
     const isValid = constants.validateFields(req.body, 'signup', 'update');
     if (isValid) {
-      body = { ...req.body };
+      const body = { ...req.body };
       await User.findOneAndUpdate({ _id: req.params.id }, body);
       return next();
     }
@@ -138,7 +140,7 @@ userController.updateUserProfile = async (req, res, next) => {
     return next(constants.createError({ message: { err: error.message } }));
   }
 };
-// Delete User Profile
+
 
 userController.deleteProfile = async (req, res, next) => {
   try {

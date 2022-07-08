@@ -49,10 +49,10 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
   const switchToSignIn = () => setShowSignIn(true);
 
   return (
-    <div style={{ top: 0, position: 'fixed', zIndex: 1, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ top: 0, position: 'fixed', zIndex: 100, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <ThemeProvider theme={theme}>
         <div onClick={closePopup} style={{ width: '100%', height: '100vh', backgroundColor: 'rgb(0, 0, 0, .65)' }}></div>
-        <Container component="div" maxWidth="xs" sx={{ position: 'fixed', zIndex: 2, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
+        <Container component="div" maxWidth="xs" sx={{ position: 'fixed', zIndex: 200, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -213,7 +213,7 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link sx={{ color: theme.palette.orange.light, textDecorationColor: theme.palette.orange.light, cursor: 'pointer' }} onClick={() => { closePopup(); switchToSignIn(); }} variant="body2">
+                  <Link sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }} onClick={() => { closePopup(); switchToSignIn(); }} variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>

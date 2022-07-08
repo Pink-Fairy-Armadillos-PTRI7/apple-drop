@@ -1,21 +1,14 @@
 const { Router } = require('express');
 const listController = require('../controllers/listController');
 const auth = require('../middlewares/Authorization');
-const upload = require('../middlewares/uploadHandler');
 
 const router = Router();
 
 router.post('/list/:id', auth, listController.createList, (req, res) => {
-  return res.status(200).json({ status: 'lets see' });
+  return res.status(200).json({ status: 'success' });
 });
-router.post(
-  '/list/upload/:id',
-  auth,
-  upload.array('image'),
-  listController.uploadListImages,
-  (req, res) => {
-    return res.status(200).json(res.locals.images);
-  }
-);
+router.get('/list/:id', auth, listController.getList, (req, res) => {
+  return res.status(200).json(res.locals.list);
+});
 
 module.exports = router;

@@ -1,81 +1,72 @@
 import React, { useState, useEffect } from 'react';
-// import mapper from '../lib/mapper.js';
 
-const listItem = {};
+import mapper from '../lib/mapper.js';
+
+import fetcher from '../lib/fetcher.js';
 
 function TestApp() {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null);
   const [list, setList] = useState([]);
-  const [imgUrls, setImgUrls] = useState([]);
-
-  const formData = new FormData();
+  const [files, setFiles] = useState([]);
 
   const beforeUpload = async (e) => {
     e.preventDefault();
+    const requestOptions = {
+      container: 'public',
+      images: files,
+      list,
+    };
 
-    for (const [key, value] of formData) {
-      console.log(key, value);
-    }
+    const response = await fetcher(
+      'upload/62c4c0be9d30e99a23cbb26f',
+      requestOptions
+    );
 
-    const data = await fetch('/api/list/upload/62c4c0be9d30e99a23cbb26f', {
-      method: 'POST',
-      body: formData,
-      // headers: {
-      //   Authorization:
-      //     'Bearer ${add token from sign up or sign in}
-      // },
-    }).then((res) => res.json());
+    const final = await mapper(response, list);
 
-    setImgUrls(data);
+    console.log('final', final);
+    await handleUpload(final);
   };
 
-  const handleUpload = () => {};
+  const handleUpload = async (parsedData) => {
+    const result = await fetcher('list/62c4c0be9d30e99a23cbb26f', parsedData);
+    console.log(result);
+  };
 
-  // const mapper = (data, list) => {
-  //   console.log(data, 'hiiiii');
-  //   if (data.length) {
-  //     return list.map((item, index) => {
-  //       const location = data.find(
-  //         (file) => file.name === item.image.name
-  //       ).location;
-
-  //       item.image = location;
-  //       return item;
-  //     });
-  //   }
-  // };
-
-  useEffect(() => {
-    console.log(imgUrls);
-    // console.log(mapper(imgUrls, list));
-  }, [imgUrls]);
+  useEffect(() => {}, []);
 
   return (
     <>
-      <form>
+      <form onSubmit={beforeUpload}>
         {[...Array(4)].map((_, index) => {
           return (
             <div className="listItem" key={index + 24}>
               <input
                 type="text"
                 placeholder="title"
-                onChange={(e) => (listItem.title = e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="description"
-                onChange={(e) => (listItem.description = e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
               <input
                 type="file"
                 onChange={(e) => {
-                  listItem.image = e.target.files[0].name;
-                  formData.append('image', e.target.files[0]);
+                  setImage(e.target.files[0]);
+                  setFiles([...files, { name: e.target.files[0].name }]);
                 }}
               />
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  setList((list) => [...list, listItem]);
+                  setList([
+                    ...list,
+                    { title, description, image: image.name, file: image },
+                  ]);
                 }}
               >
                 Push
@@ -83,24 +74,8 @@ function TestApp() {
             </div>
           );
         })}
-        <button type="submit" onClick={beforeUpload}>
-          submit
-        </button>
+        <button type="submit">submit</button>
       </form>
-
-      {/* <div className="listItem">
-        <input type="text" />
-        <input type="file" />
-      </div>
-      <div className="listItem">
-        <input type="text" />
-        <input type="file" />
-      </div>
-      <div className="listItem">
-        <input type="text" />
-        <input type="file" />
-      </div>
-    </div>*/}
     </>
   );
 }
