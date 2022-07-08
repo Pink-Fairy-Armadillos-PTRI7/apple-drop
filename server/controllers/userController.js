@@ -5,6 +5,7 @@ const Address = require('../models/addressModel');
 const constants = require('../utils/constants.js'); // => createError(), validateFields()
 const createToken = require('../utils/createToken');
 const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser');
 
 const userController = {};
 
@@ -22,7 +23,6 @@ userController.signUp = async (req, res, next) => {
       city,
       state,
       postalCode,
-     
     } = req.body;
 
     const isValid = constants.validateFields(req.body, 'signup');
@@ -35,7 +35,7 @@ userController.signUp = async (req, res, next) => {
         })
       );
 
-    let user = new User({ email, password,prefix, firstName, lastName });
+    let user = new User({ email, password, prefix, firstName, lastName });
 
     await user.save();
 
@@ -54,7 +54,16 @@ userController.signUp = async (req, res, next) => {
     user = await User.findOne({ email });
 
     if (user) {
-      res.locals.user = { ...user._doc, token: createToken(user) };
+      const timestamp = new Date().getTime();
+      let options = {
+        maxAge: timestamp + 60 * 60 * 24 * 1000 * 7,
+        // httpOnly: true,
+      };
+      const token = createToken(user);
+      res.locals.user = { ...user._doc, token };
+      res.cookie('id', res.locals.user._id + '', options);
+      res.cookie('token', token + '', options);
+
       return next();
     }
   } catch (error) {
@@ -86,9 +95,18 @@ userController.signIn = async (req, res, next) => {
         })
       );
     } else {
-      bcrypt.compare(password, user.password).then((result) => {
+      bcrypt.compare(password, user.password).then(async (result) => {
         if (result) {
-          res.locals.user = { token: createToken(user), ...user._doc };
+          const token = createToken(user);
+          const timestamp = new Date().getTime();
+          res.locals.user = { token, ...user._doc };
+          const options = {
+            maxAge: timestamp + 60 * 60 * 24 * 1000 * 7,
+          };
+
+          console.log(res.locals.user._id + '');
+          res.cookie('id', res.locals.user._id + '', options);
+          res.cookie('token', token + '', options);
           return next();
         } else {
           return next(
@@ -134,13 +152,13 @@ userController.updateUserProfile = async (req, res, next) => {
     if (isValid) {
       const body = { ...req.body };
       await User.findOneAndUpdate({ _id: req.params.id }, body);
+
       return next();
     }
   } catch (error) {
     return next(constants.createError({ message: { err: error.message } }));
   }
 };
-
 
 userController.deleteProfile = async (req, res, next) => {
   try {
