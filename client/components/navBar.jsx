@@ -41,7 +41,7 @@ const Navbar = ({ theme }) => {
                                 ) : (
                                     <>
                                     <Button
-                                        sx ={{marginLeft: 'auto', background: '#FEE440'}}
+                                        sx ={{marginLeft: 'auto', background: '#FEE440', color: 'black'}}
                                         variant='contained'
                                         onClick={() => setShowSignIn(true)}
                                         >
@@ -49,7 +49,7 @@ const Navbar = ({ theme }) => {
                                     </Button>
                                     </>
                                 )}
-                                <Button sx ={{marginLeft: "10px", background: "#FEE440"}} 
+                                <Button sx ={{marginLeft: "10px", background: "#FEE440", color: 'black'}} 
                                     variant="contained"
                                     component={Link} to = '/search'
                                 >
