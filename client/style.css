@@ -107,6 +107,12 @@ p {
   justify-content: space-around;
 }
 
+.teacher-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .teacherDash-img {
   background-image: url(https://source.unsplash.com/hXLkFpvKRys);
   box-sizing: border-box;

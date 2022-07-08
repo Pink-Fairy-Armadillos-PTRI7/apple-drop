@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab} from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+//TabPanel component for Tab display
 function TabPanel (props) {
     //children passes the string text btw TabPanel, value and index makes sure we only render the children info when user clicks on that tab
     const {children, value, index, ...other } = props
@@ -24,7 +27,20 @@ function TabPanel (props) {
         </div>
     )
 }
-//teacher will be directed to dashboard once they've logged in or signed up.
+
+//function to fetch lists based on teacher id
+// function fetchTeacherLists () {
+
+// }
+//Renders individual list item
+// const List = () => {
+//     return (
+
+//     )
+// }
+
+
+//Teacher Dashboard Component
 function TeacherDash ({theme}) {
     //set value to keep track of the individual tabs
     const [value, setValue] = useState(0)
@@ -48,6 +64,17 @@ function TeacherDash ({theme}) {
                 <div className = 'teacher-info'>
                     <Box className ='teacher-column' id = 'teacher-list'>
                         <h2 style ={{color: theme.palette.orange.main}}>Lists</h2>
+                        <Button 
+                            sx = {{
+                                variant: 'contained',
+                                background: theme.palette.orange.main,
+                                color: 'black',
+                                marginBottom: '2em'
+                            }}
+                            component = { Link } to = '/create-list'
+                        > 
+                            Create a new list 
+                        </Button>
                         <Tabs value = {value} onChange = {handleChange}>
                             <Tab label = 'All'/>
                             <Tab label = 'Drafts'/>
