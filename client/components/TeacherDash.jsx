@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import ClearIcon from '@mui/icons-material/Clear';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 
@@ -57,9 +57,15 @@ const AllLists = (props) => {
         const lastUpdated = createDate(list.updatedAt)
         listArr.push(
             <div key = {`listItem${el}`}>
-                <ListItem sx ={{display: 'flex', justifyContent: 'space-between'}}>
+                <ListItem sx ={{display: 'flex', justifyContent: 'space-around'}}>
                     <ListItemText primary={name} secondary={`Date Created: ${dateCreated}`} >
                     </ListItemText>
+                    <IconButton aria-label="delete">
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton aria-label="delete">
+                        <DeleteIcon />
+                    </IconButton>
                 </ListItem>
                 <Divider />
             </div>
@@ -67,7 +73,7 @@ const AllLists = (props) => {
     });
     //each list will reflect an edit and delete button
     return (
-        <Box sx = {{width: '100%', bgcolor: theme.palette.blueCream.main}}>
+        <Box sx = {{bgcolor: theme.palette.blueCream.main}}>
             <List>
                 {listArr}
             </List>
@@ -170,32 +176,31 @@ function TeacherDash ({theme}) {
                     <h1 style = {{color: 'white', paddingTop: '1em'}}>Hello, Ms.Holubeck!</h1>
                 </Box>
                 <div className = 'teacher-info'>
-                    <Box className ='teacher-column' id = 'teacher-list'>
+                    <Box className ='teacher-column' id = 'teacher-list' sx = {{width: '65%'}}>
                         <h2 style ={{color: theme.palette.orange.main}}>Lists</h2>
-                        <Button 
-                            sx = {{
-                                variant: 'contained',
-                                background: theme.palette.orange.main,
-                                color: 'black',
-                                marginBottom: '2em'
-                            }}
-                            component = { Link } to = '/create-list'
-                        > 
-                            Create a new list 
-                        </Button>
                         <Tabs value = {value} onChange = {handleChange}>
                             <Tab label = 'All'/>
                             <Tab label = 'Drafts'/>
                         </Tabs>
                         <TabPanel value = {value} index = {0}> 
                             <AllLists teacherLists = {teacherLists} theme = {theme}></AllLists>
-                            Deez Nutz 
                         </TabPanel>
                         <TabPanel value = {value} index = {1}>
-                             Goteem
                         </TabPanel>
+                        <Button 
+                            sx = {{
+                                variant: 'contained',
+                                background: theme.palette.orange.main,
+                                color: 'black',
+                                marginTop: '2em',
+                                
+                            }}
+                            component = { Link } to = '/create-list'
+                        > 
+                            Create a new list 
+                        </Button>
                     </Box>
-                    <Box className ='teacher-column' id = 'teacher-story'>
+                    <Box className ='teacher-column' id = 'teacher-story' sx = {{width: '35%', marginLeft: '1em'}}>
                         <h3 style ={{color: theme.palette.orange.main}} >Your Story</h3>
                             <h6> </h6>
                         <h3 style ={{color: theme.palette.orange.main}} >Your School </h3>

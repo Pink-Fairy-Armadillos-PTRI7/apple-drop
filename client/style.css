@@ -105,13 +105,15 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 2em;
 }
 
 .teacher-column {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
+
 
 .teacherDash-img {
   background-image: url(https://source.unsplash.com/hXLkFpvKRys);
