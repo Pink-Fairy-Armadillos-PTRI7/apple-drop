@@ -34,40 +34,40 @@ function TabPanel (props) {
 async function fetchTeacherLists() {
     //return a list containing an array of list items, object of lists?
     const id = '62c4c0be9d30e99a23cbb26f'
-    // try {
-    //     const teacherLists = await axios.get(`/api/list/${id}`,
-    //     {
-    //         headers: {
-    //             // 'Content-Type': 'application/json',
-    //             Authorization:
-    //               'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
-    //           }
-    //     })
-    //     // console.log('teachers are =>', teacherLists.data)
-    //     //add teacher lists to list state in teacherDash component
-    //     //add authorization header with token inside it
-    //     // setLists([response.data])
-    // }
-    // catch {
-    //     console.log('error in getting users')
-    // }
-    fetch(`/api/list/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
-        },
-      })
-        .then((res) => {
-          if (res.status > 399 && res.status < 200) {
-            throw new Error();
-          }
-          return res.json();
+    try {
+        const teacherLists = await axios.get(`/api/list/${id}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:
+                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+              }
         })
-        .then((data) => {
-            console.log('response is=>', data)
-        //   return data;
-        });
+        console.log('teachers are =>', teacherLists.data)
+        //add teacher lists to list state in teacherDash component
+        //add authorization header with token inside it
+        // setLists([response.data])
+    }
+    catch (err) {
+        console.log('error is =>', err)
+    }
+    // fetch(`/api/list/${id}`, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization:
+    //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+    //     },
+    //   })
+    //     .then((res) => {
+    //       if (res.status > 399 && res.status < 200) {
+    //         throw new Error();
+    //       }
+    //       return res.json();
+    //     })
+    //     .then((data) => {
+    //         console.log('response is=>', data)
+    //     //   return data;
+    //     });
 }
 //function to fetch teacher story
 //id - coming from the 
