@@ -1,4 +1,5 @@
 const { createError, validateFields } = require('../utils/constants.js');
+const List = require('../models/ListModel');
 
 const List = require('../models/ListModel.js');
 
@@ -20,10 +21,20 @@ teacherList.createList = async (req, res, next) => {
   }
 };
 
-teacherList.getList = async (req, res, next) => {
+// Update List by Id
+teacherList.updateList = async (req, res, next) => {
   try {
-    const list = await List.find({ userId: req.user._id });
-    res.locals.list = list;
+    // how to update each list by Id
+    return next();
+  } catch (error) {
+    return next(createError({ message: { err: error.message } }));
+  }
+};
+
+// Delete List by Id
+teacherList.deleteList = async (req, res, next) => {
+  try {
+    // how to delete each list by Id
     return next();
   } catch (error) {
     return next(createError({ message: { err: error.message } }));
