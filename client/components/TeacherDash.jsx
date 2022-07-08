@@ -35,11 +35,10 @@ function TabPanel (props) {
         </div>
     )
 }
-//Renders individual lists
+//Renders individual lists of teacher
 const AllLists = (props) => {
     function createDate(dateStr){
         let date = new Date(dateStr)
-        console.log(date)
         let d = date.getDate()
         let m = date.getMonth()+1
         let y = date.getFullYear()
@@ -47,10 +46,8 @@ const AllLists = (props) => {
     }
     //iterate through the teacherLists array properly 
     const {teacherLists, theme} = props;
-    //teacherLists is an arr of objs, want to reflect name property
     const listArr = [];
     teacherLists.forEach((list, el) => {
-        //get list name and date created from obj
         let name;
         (list.name)? name = list.name: name = 'Supplies for my 3rd grade classroom'
         const dateCreated = createDate(list.createdAt)
@@ -71,13 +68,30 @@ const AllLists = (props) => {
             </div>
         )
     });
-    //each list will reflect an edit and delete button
     return (
         <Box sx = {{bgcolor: theme.palette.blueCream.main}}>
             <List>
                 {listArr}
             </List>
         </Box>
+    )
+}
+
+//renders teacher story
+//renders teacher address
+function Address(props) {
+    const {teacherAddress} = props;
+    return (
+       <Box sx ={{
+            fontSize: '.3em'
+       }}>
+            <p>{teacherAddress.schoolName}</p>
+            <div style ={{}}>
+                <p>{teacherAddress.street}</p>
+                <p>{teacherAddress.city}, {teacherAddress.state} {teacherAddress.postalCode}</p>
+            </div>
+       </Box>
+
     )
 }
 
@@ -152,6 +166,7 @@ function TeacherDash ({theme}) {
                 }
             })
             console.log('teachers are =>', teacherInfo.data)
+            setAddress(teacherInfo.data.address)
         }
         catch(err) {
             console.log('Error in fetching teacher address', err)
@@ -161,7 +176,7 @@ function TeacherDash ({theme}) {
     useEffect(() =>{
         fetchTeacherLists()
         // fetchTeacherStory()
-        // fetchTeacherAddress()
+        fetchTeacherAddress()
     }, [])
 
     return ( 
@@ -193,10 +208,14 @@ function TeacherDash ({theme}) {
                                 background: theme.palette.orange.main,
                                 color: 'black',
                                 marginTop: '2em',
+                                width: '50%',
+                                ':hover': {
+                                    bgcolor: 'theme.palette.blue.main', // theme.palette.primary.main
+                                }
                                 
                             }}
                             component = { Link } to = '/create-list'
-                        > 
+                         > 
                             Create a new list 
                         </Button>
                     </Box>
@@ -204,8 +223,9 @@ function TeacherDash ({theme}) {
                         <h3 style ={{color: theme.palette.orange.main}} >Your Story</h3>
                             <h6> </h6>
                         <h3 style ={{color: theme.palette.orange.main}} >Your School </h3>
-                            <h6> </h6>
+                            <Address teacherAddress = {teacherAddress}></Address>
                     </Box>
+                  
                 </div>
             </ThemeProvider>
         </div>
