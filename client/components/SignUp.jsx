@@ -40,8 +40,16 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
         state: data.get('state'),
         postalCode: data.get('postalCode')
       })
-    }).then(response => response.json()).then(result => console.log(result)).catch(e => console.log(e));
-    closePopup();
+    })
+      .then(response => response.json())
+      .then(userData => {
+        console.log(userData);
+        // Throw error if there was no Id or token
+        if (!userData) throw new Error('Incorrect response from server');
+        setUser(userData); // Id, token, email, password, firstname, lastname, address
+        closePopup();
+      })
+      .catch(e => alert(e.message));
   };
 
   const closePopup = () => setShowSignUp(false);
