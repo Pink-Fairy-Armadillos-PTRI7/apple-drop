@@ -14,7 +14,7 @@ const CreateListRow = ({ name, description, price, link }) => {
       <Card variant="outlined" style={{ height: 300, background: 'none', border: 'none' }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            ${ parseInt(price).toFixed(2) }
+            ${ parseInt(price).toFixed(2) }/ea
           </Typography>
           <Typography variant="h5" component="div">
             { name }
