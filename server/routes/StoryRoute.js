@@ -21,16 +21,16 @@ router.get(
 router.post(
   '/story/:id',
   auth,
-  upload.single('image'),
+
   storyController.createStory,
   (req, res) => {
-    return res.status(200).json({ status: 'success' });
+    return res.status(200).json({ status: 'success', image: res.locals.image });
   }
 );
 router.patch(
   '/story/:id',
   auth,
-  upload.single('image'),
+  upload,
   storyController.updateStory,
   (req, res) => {
     return res.status(200).json({ status: 'success' });

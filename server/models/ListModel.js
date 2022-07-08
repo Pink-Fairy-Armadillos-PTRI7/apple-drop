@@ -7,6 +7,7 @@ const listItemSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    name: { type: String, required: true },
     list: [
       {
         title: { type: String, required: true },

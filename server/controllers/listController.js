@@ -1,28 +1,29 @@
 const { createError, validateFields } = require('../utils/constants.js');
 
+const List = require('../models/ListModel.js');
+
 require('dotenv').config();
 
 const teacherList = {};
 
-teacherList.uploadListImages = async (req, res, next) => {
+teacherList.createList = async (req, res, next) => {
   try {
-    console.log(req.files, 'filesss');
-
-    const locations = req?.files.map((file) => {
-      console.log(file);
-      return { location: file?.location, name: file.originalname };
+    await List.create({
+      userId: req.user._id,
+      name: req.body.name,
+      list: req.body.list,
     });
-    res.locals.images = locations;
+
     return next();
   } catch (error) {
     return next(createError({ message: { err: error.message } }));
   }
 };
 
-teacherList.createList = (req, res, next) => {
+teacherList.getList = async (req, res, next) => {
   try {
-    console.log(req.files, req.file, req.body);
-
+    const list = await List.find({ userId: req.user._id });
+    res.locals.list = list;
     return next();
   } catch (error) {
     return next(createError({ message: { err: error.message } }));
