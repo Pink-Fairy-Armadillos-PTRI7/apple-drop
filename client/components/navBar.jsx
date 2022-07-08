@@ -7,10 +7,12 @@ import Button from '@mui/material/Button';
 import DrawerComp from './DrawerComp.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 
-const Navbar = ({ theme }) => {
+import Cookies from 'js-cookie';
+
+const Navbar = ({ theme, setUser }) => {
   const user = useStoreState((state) => state.user);
   //implement conditional rendering that checks if a user is registered or not
   //create state to figure out if user is signed in or not
@@ -22,7 +24,14 @@ const Navbar = ({ theme }) => {
   //md represents 960px, so mobileView checks to see if the current screen size is btw 0 and 960px and returns a boolean
   const mobileView = useMediaQuery(theme.breakpoints.down('md'));
 
-  // console.log('match is => ', mobileView);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove('id');
+    Cookies.remove('token');
+    setUser(null);
+    navigate('/');
+  };
   return (
     <>
       {/* using nav tag for accessibility reasons */}
@@ -60,18 +69,20 @@ const Navbar = ({ theme }) => {
                   Apple Drop
                 </Typography>
                 {user ? (
-                  <Typography
-                    sx={{
-                      marginLeft: 'auto',
-                      color: 'black',
-                      fontWeight: 'normal',
-                      fontSize: 19,
-                      color: 'white',
-                    }}
-                    variant="h3"
-                  >
-                    Hello {user.firstName}{' '}
-                  </Typography>
+                  <>
+                    <Typography
+                      sx={{
+                        marginLeft: 'auto',
+                        color: 'black',
+                        fontWeight: 'normal',
+                        fontSize: 19,
+                        color: 'white',
+                      }}
+                      variant="h3"
+                    >
+                      Hello {user.firstName}{' '}
+                    </Typography>
+                  </>
                 ) : (
                   <>
                     <Button
@@ -91,6 +102,17 @@ const Navbar = ({ theme }) => {
                 >
                   Donate to teachers
                 </Button>
+                {user && (
+                  <Button
+                    sx={{ marginLeft: '10px', background: '#FEE440' }}
+                    variant="contained"
+                    component={Link}
+                    to="/"
+                    onClick={handleLogout}
+                  >
+                    logout
+                  </Button>
+                )}
               </>
             )}
           </Toolbar>

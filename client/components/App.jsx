@@ -25,20 +25,18 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar theme={theme} user={user} setUser={setUser} />
-      <Routes>
-        <Route exact path="/" element={<Home theme={theme} />} />
-        <Route
-          exact
-          path="/create-list"
-          element={
-            <Auth user={user}>
-              <CreateList theme={theme} />
-            </Auth>
-          }
-        />
-        <Route exact path="/test" element={<Test />} />
-      </Routes>
+      <Auth user={user}>
+        <Navbar theme={theme} user={user} setUser={setUser} />
+        <Routes>
+          <Route exact path="/" element={<Home theme={theme} />} />
+          <Route
+            exact
+            path="/create-list"
+            element={<CreateList theme={theme} />}
+          />
+          <Route exact path="/test" element={<Test />} />
+        </Routes>
+      </Auth>
     </Router>
   );
 };
