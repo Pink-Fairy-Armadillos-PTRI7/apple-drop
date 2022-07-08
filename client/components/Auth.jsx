@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { me } from '../lib/hooks.js';
 import { useStoreState } from 'easy-peasy';
@@ -16,29 +16,42 @@ const Auth = ({ children }) => {
   const token = Cookies.get('token');
 
   const [error, setError] = useState(null);
+  const [displayChildren, setDisplayChildren] = useState(false);
   const nav = useNavigate();
 
-  // Handles routing
+  const location = useLocation();
+
+  const publicRoutes = { '/': true, '/test': true };
 
   useEffect(() => {
-    if (!token || !id) nav('/');
+    if (publicRoutes[location.pathname]) setDisplayChildren(true);
+    else {
+      if (!token || !id) {
+        setDisplayChildren(true);
+        nav('/');
+      }
+      if (!user) {
+        const { user: data, isError, isLoading } = me(id);
+        if (user) {
+          setUser(data);
+        }
 
-    if (!user) {
-      const { user: data, isError, isLoading } = me(id);
-      if (user) setUser(data);
-
-      if (isError) nav('/');
+        if (isError) nav('/');
+      }
     }
   }, []);
-
   useEffect(() => {
     if (error) {
       nav('/');
       setError(null);
     }
-  }, [error]);
 
-  return children; // Render the inner component
+    if (user) {
+      setDisplayChildren(true);
+    }
+  }, [error, user]);
+
+  return displayChildren && children; // Render the inner component
 };
 
 export default Auth;
