@@ -16,7 +16,6 @@ const ListContainer = ({theme}) => {
 
 
   useEffect(() => {
-    // if (zip) {
       
     fetch('/api/stories')
     .then(res => {
