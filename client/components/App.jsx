@@ -31,21 +31,16 @@ const App = () => {
       </Routes> */}
       <ErrorBoundary>
         <Navbar theme={theme} setUser={setUser} />
-        <Routes>
-          <Route exact path='/search' element={<ListContainer theme={theme} />} />
-          <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
-        </Routes>
         <Auth>
-         
           <Routes>
+            <Route exact path='/search' element={<ListContainer theme={theme} />} />
+            <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
             <Route exact path="/" element={<Home theme={theme} />} />
             <Route
               exact
               path="/create-list"
               element={<CreateList theme={theme} />}
             /> 
-            <Route exact path='/search' element={<ListContainer theme={theme} />} />
-            <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Auth>
