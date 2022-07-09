@@ -26,7 +26,14 @@ teacherStory.createStory = async (req, res, next) => {
 
 teacherStory.getAllStories = async (req, res, next) => {
   try {
-    const stories = await Story.find();
+    const stories = await Story.find().populate({
+      path: 'userId',
+      select: '_id email firstName lastName',
+      populate: {
+        path: 'address',
+        select: 'schoolName street city postalCode',
+      },
+    });
     res.locals.stories = stories;
     return next();
   } catch (error) {
@@ -36,7 +43,14 @@ teacherStory.getAllStories = async (req, res, next) => {
 
 teacherStory.getTeacherStories = async (req, res, next) => {
   try {
-    const stories = await Story.find({ userId: req.user._id });
+    const stories = await Story.find({ userId: req.user._id }).populate({
+      path: 'userId',
+      select: '_id email firstName lastName',
+      populate: {
+        path: 'address',
+        select: 'schoolName street city postalCode',
+      },
+    });
     res.locals.stories = stories;
     return next();
   } catch (error) {
