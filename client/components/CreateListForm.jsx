@@ -3,6 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router';
 import Button from '@mui/material/Button';
 import CreateListRow from './CreateListRow.jsx';
 import TextField from '@mui/material/TextField';
@@ -19,6 +20,7 @@ import CheckIcon from '@mui/icons-material/Check';
 function CreateListForm({ setList, theme, setName }) {
   const id = Cookies.get('id');
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
 
   const [parsedData, setParsedData] = useState([]);
   const [success, setSuccess] = useState(false);
@@ -122,7 +124,8 @@ function CreateListForm({ setList, theme, setName }) {
     if (success) {
       setTimeout(() => {
         setSuccess(false);
-      }, 6000);
+        navigate('/dashboard');
+      }, 2500);
     }
     if (error) {
       setTimeout(() => {
