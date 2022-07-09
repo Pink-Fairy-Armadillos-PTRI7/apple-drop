@@ -8,6 +8,7 @@ import DrawerComp from './DrawerComp.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Navbar = ({ theme, user, setUser }) => {
     //implement conditional rendering that checks if a user is registered or not
@@ -30,11 +31,13 @@ const Navbar = ({ theme, user, setUser }) => {
                         mobileView ? (
                             <>
                                 <DrawerComp setShowSignIn={setShowSignIn} user={user} />
-                                <Typography variant='h8' component={Link} to={'/'} sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>Apple Drop</Typography>
+                                {/* <Typography variant='h8' component={Link} to={'/'} sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>Apple Drop</Typography> */}
+                                <Typography variant='h6' component={Link} to={'/'} sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit', verticalAlign: 'center', display: 'flex', alignItems: 'center'}}><img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop</Typography>
+                                
                             </>
                         ) : (
                             <>
-                                <Typography variant='h8' component={Link} to={'/'} sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>Apple Drop</Typography>
+                                <Typography variant='h6' component={Link} to={'/'} sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit', verticalAlign: 'center', display: 'flex', alignItems: 'center'}}><img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop</Typography>
                                 { user ? (
                                     <Typography sx={{marginLeft: 'auto', color: 'black', fontWeight: 'normal', fontSize: 19, color: 'white'}} variant='h3'>Hello { user } </Typography>
                                 ) : (

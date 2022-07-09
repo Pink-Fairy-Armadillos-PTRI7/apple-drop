@@ -6,6 +6,8 @@ import Navbar from './navBar.jsx';
 import Home from './Home.jsx';
 import CreateList from './CreateList.jsx';
 import Test from './AppTest.jsx';
+import ListContainer from './ListContainer.jsx';
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -16,6 +18,9 @@ const App = () => {
         <Route exact path='/' element={<Home theme={theme} />} />
         <Route exact path='/create-list' element={<CreateList theme={theme} />} />
         <Route exact path="/test" element={<Test />} />
+        <Route exact path='/search' element={<ListContainer theme={theme} />} />
+        <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
+        
       </Routes>
     </Router>
   );

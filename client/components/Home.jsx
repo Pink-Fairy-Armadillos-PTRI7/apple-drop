@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style.css';
-import { Button, Container, Box, Tabs, Tab, Card, CardContent} from '@mui/material';
+import { Button, Container, Box, Tabs, Tab, Card, CardContent, Paper} from '@mui/material';
 import Typography from "@mui/material/Typography";
 import SearchBar from './SearchBar.jsx';
 import profile from '../assets/profile.svg';
@@ -25,14 +25,13 @@ const TabPanel = (props) => {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius:2, backgroundColor: 'white'}}>
           <Typography>{children}</Typography>
-        </Box>
+        </Paper>
       )}
     </div>
   );
 }
-
 
 const Home = () => {
   const [value, setValue] = React.useState(0);
@@ -45,13 +44,13 @@ const Home = () => {
     <div>
       <div className='homepage-container'>
         <Box className='homepage-picture' sx={{
-          width: 1/3
+          width: 2/5
         }}/>
         <Box className='homepage-text' sx={{
-          width: 2/3
+          width: 3/5
         }}>
-          <h1>Teachers could use more than just apples. 
-            <span className='highlight'> They need our help.</span>
+          <h1>From Apples to Zip binders  
+            <span className='highlight'> Teachers need our help.</span>
           </h1>
           <p>Deliver classroom supplies to teachers in need, locally or across the country. Make an impact on a student's learning journey today.</p>
           {/* <Button variant='contained' size="large" sx={{
@@ -69,6 +68,7 @@ const Home = () => {
             borderBottom: 1,
             background: '#f6f2ef',
           }}><h1>How it works</h1>
+          
           <Box className='how-it-works-subheader'>
             <Tabs value={value}
               onChange={handleChange}
@@ -79,7 +79,7 @@ const Home = () => {
               <Tab label='For Donors' value={0}/>
               <Tab label='For Teachers' value={1}/>
             </Tabs>
-            <TabPanel  value={value} index={0}>
+            <TabPanel value={value} index={0}>
             <div className='panel'> 
               <div>
                 <img className='tab-img' src={searchList} />
@@ -120,41 +120,50 @@ const Home = () => {
               </div>
             </TabPanel>
           </Box><br/>
-          <Box className='testimonials'>
-            <h1> What users are saying about us</h1><br/>
+          <Box sx={{textAlign: 'center', minHeight: '500px'}}>
+            <h1> What our users are saying</h1><br/>
             <div className='testimonial-cards'>
               <Card sx={{
                   width: 400,
-                  minHeight: 300
+                  minHeight: 300, 
+                  position: 'relative',
+                  textAlign: 'left',
+                  borderRadius: 2
                 }}>
                 <CardContent>
                   <Typography variant='body1' color='text.secondary' gutterBottom>
                     "Wow the color palette is a 10000. Talk about surprise! I received millions of donations in my first DAY! I tried to stop them after 5000 crayons but they kept coming. I am now donating the resources I've gotten to other teachers in need. Can you make a website for gaming supplies as well? My son LOVES to spend all of his time and money on games. It would be nice to get millions of games for free as well!"
                   </Typography>
-                  <Typography variant='h5' align='right'>- Ethan M.</Typography>
+                  <Typography variant='h5' align='right' sx={{bottom: '15px', right: '15px', position: 'absolute'}}>- Ethan M.</Typography>
                 </CardContent>
               </Card>
               <Card sx={{
                   width: 400,
-                  minHeight: 300
+                  minHeight: 300, 
+                  position: 'relative',
+                  textAlign: 'left',
+                  borderRadius: 2
                 }}>
-                <CardContent sx={{position: 'relative'}}>
+                <CardContent>
                   <Typography variant='body1' color='text.secondary' gutterBottom>
                     "Thanks to this website, I am now able to keep my classroom fully stocked with extra supplies for years to come. I am even able to send home extra to my students in need, to make sure their siblings and friends can benefit as well. I’m so thankful for the generosity of our donors.
                     Thanks AppleDrop!"
                   </Typography>
-                  <Typography variant='h5' align='right' sx={{marginBottom: 0}}>- Imma D.</Typography>
+                  <Typography variant='h5' align='right' sx={{bottom: '15px', right: '15px', position: 'absolute'}}>- Imma D.</Typography>
                 </CardContent>
               </Card>
               <Card sx={{
                   width: 400,
-                  minHeight: 300
+                  minHeight: 300, 
+                  position: 'relative',
+                  textAlign: 'left',
+                  borderRadius: 2
                 }}>
                 <CardContent>
                 <Typography variant='body1' color='text.secondary' gutterBottom>
                   "I love using Apple Drop! It's so easy to navigate and the ability to create custom lists as a teacher OR link your Amazon wishlist is amazing! Now I can reach a wider audience and receive supplies for my students faster than ever! The process for donating and purchasing items from lists is also soooo intuitive - No need to sign up for an account. This is brilliant!"
                 </Typography>
-                <Typography variant='h5' align='right' sx={{marginBottom: 0}}>- Wilson T.</Typography>
+                <Typography variant='h5' align='right' sx={{bottom: '15px', right: '15px', position: 'absolute'}}>- Wilson T.</Typography>
                 </CardContent>
               </Card>
             </div>
