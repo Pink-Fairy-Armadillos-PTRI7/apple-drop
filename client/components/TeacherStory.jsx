@@ -85,7 +85,7 @@ const [parsedData, setParsedData] = useState([]);
 
     useEffect(() => {
         console.log(parsedData, 'parseedddd')
-        const result = await fetcher('/story/' + id, parsedData[0]);
+        const result = fetcher('/story/' + id, parsedData[0]);
          if (result.status === 'success') {
       setLoading(false);
              setSuccess(true);
