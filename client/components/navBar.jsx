@@ -50,7 +50,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 //                                     </Button>
 //                                     </>
 //                                 )}
-//                                 <Button sx ={{marginLeft: "10px", background: "#FEE440", color: 'black'}} 
+//                                 <Button sx ={{marginLeft: "10px", background: "#FEE440", color: 'black'}}
 //                                     variant="contained"
 //                                     component={Link} to = '/search'
 //                                 >
@@ -69,7 +69,6 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 //     )
 // }
 import Cookies from 'js-cookie';
-
 
 const Navbar = ({ theme, setUser }) => {
   const user = useStoreState((state) => state.user);
@@ -92,6 +91,8 @@ const Navbar = ({ theme, setUser }) => {
     setUser(null);
     navigate('/');
   };
+
+  console.log(user);
   return (
     <>
       {/* using nav tag for accessibility reasons */}
@@ -101,32 +102,46 @@ const Navbar = ({ theme, setUser }) => {
             {mobileView ? (
               <>
                 <DrawerComp setShowSignIn={setShowSignIn} user={user} />
-                <Typography variant='h6' 
-                  component={Link} 
-                  to={'/'} 
-                  sx={{ 
-                    cursor: 'pointer', 
-                    textDecoration: 'none', 
-                    color: 'inherit', 
-                    verticalAlign: 'center', 
-                    display: 'flex', 
-                    alignItems: 'center'}}>
-                  <img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop
+                <Typography
+                  variant="h6"
+                  component={Link}
+                  to={'/'}
+                  sx={{
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    verticalAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <img
+                    style={{ height: '60px', paddingRight: '10px' }}
+                    src={logo}
+                  />
+                  Apple Drop
                 </Typography>
               </>
             ) : (
               <>
-                <Typography variant='h6' 
-                  component={Link} 
-                  to={'/'} 
-                  sx={{ 
-                    cursor: 'pointer', 
-                    textDecoration: 'none', 
-                    color: 'inherit', 
-                    verticalAlign: 'center', 
-                    display: 'flex', 
-                    alignItems: 'center'}}>
-                  <img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop
+                <Typography
+                  variant="h6"
+                  component={Link}
+                  to={'/'}
+                  sx={{
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    verticalAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <img
+                    style={{ height: '60px', paddingRight: '10px' }}
+                    src={logo}
+                  />
+                  Apple Drop
                 </Typography>
                 {user ? (
                   <>
