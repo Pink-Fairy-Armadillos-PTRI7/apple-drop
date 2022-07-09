@@ -1,11 +1,14 @@
+import Cookies from 'js-cookie';
+
 function fetcher(url, data) {
+  const token = Cookies.get('token');
+
   return fetch(`/api/${url}`, {
     method: data ? 'POST' : 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+      Authorization: 'Bearer ' + token,
     },
 
     body: JSON.stringify(data),
