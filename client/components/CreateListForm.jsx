@@ -119,8 +119,17 @@ function CreateListForm({ setList, theme, setName }) {
   }, [parsedData]);
 
   useEffect(() => {
-    console.log(success);
-  }, [success]);
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 6000);
+    }
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 6000);
+    }
+  }, [success, error]);
 
   return (
     <>
@@ -272,32 +281,29 @@ function CreateListForm({ setList, theme, setName }) {
           </Button>
         ) : null}
       </Box>
-      {error && (
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={error}
-          onClose={handleClose}
-          message="I love snacks"
-          key={vertical + horizontal}
-          autoHideDuration={3000}
-        >
-          <Alert severity="error">
-            Something went wrong, please try again later
-          </Alert>
-        </Snackbar>
-      )}
-      {success && (
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={success}
-          onClose={handleClose}
-          message="I love snacks"
-          key={vertical + horizontal}
-          autoHideDuration={3000}
-        >
-          <Alert severity="success">successfully created list</Alert>
-        </Snackbar>
-      )}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={error}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal}
+        autoHideDuration={3000}
+      >
+        <Alert severity="error">
+          Something went wrong, please try again later
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={success}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal}
+        autoHideDuration={3000}
+      >
+        <Alert severity="success">successfully created list</Alert>
+      </Snackbar>
     </>
   );
 }
