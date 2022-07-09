@@ -16,6 +16,7 @@ const ListContainer = ({theme}) => {
 
 
   useEffect(() => {
+      
     fetch('/api/stories')
     .then(res => {
       return res.json();
@@ -26,15 +27,15 @@ const ListContainer = ({theme}) => {
     })
     .catch(err => console.log(err));
 
-    fetch('/api/users')
-    .then(res => {
-      return res.json();
-    })
-    .then((userData) => {
-      console.log('userData here ->', userData);
-      setUsers(userData);
-    })
-    .catch(err => console.log(err));
+    // fetch('/api/users')
+    // .then(res => {
+    //   return res.json();
+    // })
+    // .then((userData) => {
+    //   console.log('userData here ->', userData);
+    //   setUsers(userData);
+    // })
+    // .catch(err => console.log(err));
   }, []);
 
   return (
@@ -49,9 +50,10 @@ const ListContainer = ({theme}) => {
         <SearchBar ></SearchBar>
         <Paper elevation={3} sx={{
           display: 'flex',
+          flexWrap: 'wrap',
           gap: 8, 
           width: '100%', 
-          height: '90vh', 
+           
           mt: 6,
           backgroundColor: theme.palette.orange.light
           }}>
