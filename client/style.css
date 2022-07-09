@@ -94,3 +94,31 @@ p {
   gap: 150px;
 }
 
+
+/* TEACHER DASHBOARD STYLING */
+.teacherDash-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} 
+.teacher-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2em;
+}
+
+.teacher-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+.teacherDash-img {
+  background-image: url(https://source.unsplash.com/hXLkFpvKRys);
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
