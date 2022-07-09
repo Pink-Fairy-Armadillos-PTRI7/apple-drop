@@ -5,7 +5,12 @@ module.exports = {
   entry: './client/index.js',
   output: {
     filename: 'build.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
   devtool: 'eval-cheap-source-map',
   mode: process.env.NODE_ENV,
@@ -17,44 +22,44 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [ '@babel/preset-env', '@babel/preset-react' ]
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|svg|gif)$/i,
         use: [
           {
             loader: 'file-loader',
           },
         ],
       },
-    ]
+    ],
   },
   devServer: {
     host: 'localhost',
     hot: true,
     static: {
       directory: path.join(__dirname, 'build'),
-      publicPath: '/'
+      publicPath: '/',
     },
     compress: false,
     port: 8080,
     historyApiFallback: true,
     proxy: {
-      '/': {
+      '/api': {
         target: 'http://localhost:3000/',
-        secure: false
-      }
-    }
+        secure: false,
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/index.html'
-    })
-  ]
-}
+      template: './client/index.html',
+    }),
+  ],
+};
