@@ -16,6 +16,8 @@ const ListContainer = ({theme}) => {
 
 
   useEffect(() => {
+    // if (zip) {
+      
     fetch('/api/stories')
     .then(res => {
       return res.json();
@@ -26,15 +28,15 @@ const ListContainer = ({theme}) => {
     })
     .catch(err => console.log(err));
 
-    fetch('/api/users')
-    .then(res => {
-      return res.json();
-    })
-    .then((userData) => {
-      console.log('userData here ->', userData);
-      setUsers(userData);
-    })
-    .catch(err => console.log(err));
+    // fetch('/api/users')
+    // .then(res => {
+    //   return res.json();
+    // })
+    // .then((userData) => {
+    //   console.log('userData here ->', userData);
+    //   setUsers(userData);
+    // })
+    // .catch(err => console.log(err));
   }, []);
 
   return (

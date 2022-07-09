@@ -26,8 +26,9 @@ const App = () => {
   return (
     <Router>
       <ErrorBoundary>
-        <Navbar theme={theme} setUser={setUser} />
+       
         <Auth>
+          <Navbar theme={theme} setUser={setUser} />
           <Routes>
           <Route exact path='/search' element={<ListContainer theme={theme} />} />
           <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
