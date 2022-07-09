@@ -7,8 +7,19 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import Cookies from 'js-cookie';
+import fetcher from '../lib/fetcher.js';
+import mapper from '../lib/mapper.js'
 
 
+
+
+
+
+
+//ULTIMATELY RELYING ON THE PERSISTENCE OF THE USER ID
+const id = Cookies.get('id');
+const token = Cookies.get('token');
 //allows user to input image from their own file system
 const FileInput = ({theme, setImage, imageUrl, image}) => {
     return (
@@ -37,12 +48,77 @@ function TeacherStory ({theme}) {
     const [title, setTitle] = useState('')
     const [story, setStory] = useState('')
 
+
+
+const [parsedData, setParsedData] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+
+
+    const beforeUpload = async () => {
+    
+    setLoading(true);
+    const requestOptions = {
+      container: 'public',
+        images: [{ name: image.name }]
+        
+    };
+
+        const response = await fetcher('upload/' + id, requestOptions);
+        
+        console.log(response, 'here')
+
+    if (response.length) {
+     
+        const parsed = await mapper(response, [{ title, description: story, image }]);
+        console.log(parsed)
+        setParsedData(parsed);
+            return;
+    }
+    setError(true);
+    setLoading(false);
+  };
+
+    useEffect(() => {
+        console.log(parsedData, 'parseedddd')
+    }, [parsedData])
+
+  const handleUpload = async () => {
+      const result = await fetch('/api/story/' + id, {
+          method: 'POST',
+         body: JSON.stringify(parsedData[0]) });
+
+    if (result.status === 'success') {
+      setLoading(false);
+      setSuccess(true);
+console.log('success')
+      return;
+    }
+    console.log('error')
+    setLoading(false);
+    setError(true);
+  };
+
     useEffect(() => {
         if (image) {
           setImageUrl(URL.createObjectURL(image));
         }
       }, [image]);
-
+    async function handleSubmit (e){
+        e.preventDefault();
+        try{
+      
+           await beforeUpload();
+           await handleUpload()
+            console.log('data is=>', data)
+        }
+        catch (err){
+            console.log(err)
+            console.log('Error in sending teacher story')
+        }
+    }
     const user = useStoreState((state) => state.user);
     //for MVP purposes
     if(!user) user = 'Ms. Holubeck'
@@ -50,7 +126,7 @@ function TeacherStory ({theme}) {
         <div className = 'teacherStory'>
             <ThemeProvider theme = {theme}>
                 <Box>
-                    <h1>Welcome {user} </h1>
+                    <h1>Welcome {user.firstName} </h1>
                     <h3>Lets get started on creating your first list.</h3>
                 </Box>
                 <Box>
@@ -62,7 +138,7 @@ function TeacherStory ({theme}) {
                         Feel free to create wishlists from Amazon and be sure upload the registry to your account as well!
                     </h5>
                 </Box>
-                <Box component="form"  className='teacher-story-info'style={{display: 'flex', flexDirection: 'column'}}>
+                <Box component="form" onSubmit={handleSubmit} className='teacher-story-info'style={{display: 'flex', flexDirection: 'column'}}>
                     <TextField label='Title' placeholder={'Help out Ms. McRae\'s 5th Grade Math Club'} onInput = {(e) => setTitle(e.target.value)} required ></TextField>
                     <TextField label='Your Story' onInput = {(e) => setStory(e.target.value)} placeholder='Help give my students dry erase boards and markers to help us practice for math competitions' required></TextField>
                     <FileInput theme={theme} image={image} setImage={setImage} imageUrl={imageUrl}></FileInput>
@@ -72,7 +148,7 @@ function TeacherStory ({theme}) {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         //when user submits, will redirect them to the user dashboard
-                        component = {Link} to ='/dashboard'
+                        // component = {Link} to ='/dashboard'
                     >
                         Submit
                     </Button>

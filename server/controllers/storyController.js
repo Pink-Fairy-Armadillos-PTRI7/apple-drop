@@ -5,12 +5,14 @@ require('dotenv').config();
 const teacherStory = {};
 
 teacherStory.createStory = async (req, res, next) => {
+  console.log('user story=>', req.body)
   try {
     const isValid = validateFields(req.body, 'story');
     if (isValid) {
-      const { title, description } = req.body;
+      const { title, description, image } = req.body;
       await Story.create({
-        image: req.file.location,
+        //image: req.file.location,
+        image,
         title,
         description,
         userId: req.user._id,

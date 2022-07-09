@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import { useStoreState } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 const SignUp = ({ theme, setShowSignUp, setShowSignIn, setUser }) => {
   // State
