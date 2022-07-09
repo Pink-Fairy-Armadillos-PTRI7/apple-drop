@@ -32,6 +32,9 @@ function TeacherStory ({theme, user}) {
     //save file data from user
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
+    //save form data from teacher
+    const [title, setTitle] = useState('')
+    const [story, setStory] = useState('')
 
     useEffect(() => {
         if (image) {
@@ -58,8 +61,8 @@ function TeacherStory ({theme, user}) {
                     </h5>
                 </Box>
                 <Box component="form"  className='teacher-story-info'style={{display: 'flex', flexDirection: 'column'}}>
-                    <TextField label='Title' placeholder={'Help out Ms. McRae\'s 5th Grade Math Club'} required ></TextField>
-                    <TextField label='Your Story' placeholder='Help give my students dry erase boards and markers to help us practice for math competitions' required></TextField>
+                    <TextField label='Title' placeholder={'Help out Ms. McRae\'s 5th Grade Math Club'} onInput = {(e) => setTitle(e.target.value)} required ></TextField>
+                    <TextField label='Your Story' onInput = {(e) => setDescription(e.target.value)} placeholder='Help give my students dry erase boards and markers to help us practice for math competitions' required></TextField>
                     <FileInput theme={theme} image={image} setImage={setImage} imageUrl={imageUrl}></FileInput>
                     <Button
                         color="orange"
