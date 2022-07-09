@@ -1,10 +1,13 @@
 import { createStore, action } from 'easy-peasy';
 
 const store = createStore({
-  user: {},
-  lists: {},
-  stories: {},
-
+  user: null,
+  userList: { name: '', list: [] },
+  lists: [],
+  stories: null,
+  setList: action((state, payload) => {
+    state.userList = { ...state.userList, ...payload };
+  }),
   setUser: action((state, payload) => {
     state.user = payload;
   }),

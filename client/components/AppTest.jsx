@@ -31,7 +31,7 @@ function TestApp() {
   };
 
   const handleUpload = async (parsedData) => {
-    const result = await fetcher('list/62c4c0be9d30e99a23cbb26f', parsedData);
+    const result = await fetcher('story/62c4c0be9d30e99a23cbb26f', parsedData);
     console.log(result);
   };
 

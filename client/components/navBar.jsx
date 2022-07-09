@@ -8,12 +8,13 @@ import DrawerComp from './DrawerComp.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { useStoreState } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import Cookies from 'js-cookie';
 
 const Navbar = ({ theme, setUser }) => {
   const user = useStoreState((state) => state.user);
+
   //implement conditional rendering that checks if a user is registered or not
   //create state to figure out if user is signed in or not
   const [showSignUp, setShowSignUp] = useState(false);
