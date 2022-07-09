@@ -25,11 +25,7 @@ teacherList.getList = async (req, res, next) => {
     const list = await List.find({ userId: req.user._id });
 
     res.locals.list = list;
-<<<<<<< HEAD
-    return next()
-=======
     return next();
->>>>>>> dev
   } catch (error) {
     return next(createError({ message: { err: error.message } }));
   }
