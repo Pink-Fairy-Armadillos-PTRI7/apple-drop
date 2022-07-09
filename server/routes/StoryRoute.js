@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const storyController = require('../controllers/storyController');
 const auth = require('../middlewares/Authorization');
-const upload = require('../middlewares/uploadHandler');
+const upload = require('../middlewares/multerUploadHandler');
 
 const router = Router();
 
@@ -21,7 +21,7 @@ router.get(
 router.post(
   '/story/:id',
   auth,
-
+  upload.single('image'),
   storyController.createStory,
   (req, res) => {
     return res.status(200).json({ status: 'success', image: res.locals.image });
@@ -30,7 +30,7 @@ router.post(
 router.patch(
   '/story/:id',
   auth,
-  upload,
+  upload.single('image'),
   storyController.updateStory,
   (req, res) => {
     return res.status(200).json({ status: 'success' });

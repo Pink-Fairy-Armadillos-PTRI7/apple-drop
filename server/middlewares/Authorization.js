@@ -38,6 +38,7 @@ const auth = async (req, res, next) => {
         );
       }
     } catch (e) {
+      console.log(e, token);
       return next(
         createError({
           status: 401,

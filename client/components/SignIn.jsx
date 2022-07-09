@@ -10,8 +10,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
+  const setUser = useStoreActions((state) => state.setUser);
+  const user = useStoreState((state) => state.user);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -19,14 +22,22 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
     fetch('/api/signin', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: data.get('email'),
-        password: data.get('password')
+        password: data.get('password'),
+      }),
+    })
+      .then((response) => response.json())
+      .then((userData) => {
+        console.log(userData);
+        // Throw error if there was no Id or token
+        if (!userData) throw new Error('Incorrect response from server');
+        setUser(userData); // Id, token, email, password, firstname, lastname, address
+        closePopup();
       })
-    }).then(response => response.json()).then(result => console.log(result)).catch(e => console.log(e));
-    closePopup();
+      .catch((e) => alert(e.message));
   };
 
   const closePopup = () => setShowSignIn(false);
@@ -34,10 +45,38 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
   const switchToSignIn = () => setShowSignUp(true);
 
   return (
-    <div style={{ top: 0, position: 'fixed', zIndex: 100, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onClick={closePopup} style={{ width: '100%', height: '100vh', backgroundColor: 'rgb(0, 0, 0, .65)' }}></div>
+    <div
+      style={{
+        top: 0,
+        position: 'fixed',
+        zIndex: 100,
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        onClick={closePopup}
+        style={{
+          width: '100%',
+          height: '100vh',
+          backgroundColor: 'rgb(0, 0, 0, .65)',
+        }}
+      ></div>
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ position: 'fixed', zIndex: 200, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
+        <Container
+          component="main"
+          maxWidth="xs"
+          sx={{
+            position: 'fixed',
+            zIndex: 200,
+            backgroundColor: theme.palette.cream.main,
+            borderRadius: 4,
+            paddingBottom: 4,
+          }}
+        >
           <CssBaseline />
           <Box
             sx={{
@@ -50,7 +89,12 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 sx={{ background: theme.palette.blueCream.light }}
                 margin="normal"
@@ -88,12 +132,31 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2" sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }}>
+                  <Link
+                    href="#"
+                    variant="body2"
+                    sx={{
+                      color: theme.palette.orange.dark,
+                      textDecorationColor: theme.palette.orange.dark,
+                      cursor: 'pointer',
+                    }}
+                  >
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link onClick={() => { closePopup(); switchToSignIn(); }} variant="body2" sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }}>
+                  <Link
+                    onClick={() => {
+                      closePopup();
+                      switchToSignIn();
+                    }}
+                    variant="body2"
+                    sx={{
+                      color: theme.palette.orange.dark,
+                      textDecorationColor: theme.palette.orange.dark,
+                      cursor: 'pointer',
+                    }}
+                  >
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>
@@ -104,6 +167,6 @@ const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default SignIn;
