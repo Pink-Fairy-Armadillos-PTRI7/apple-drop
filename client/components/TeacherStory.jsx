@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 
 //allows user to input image from their own file system
@@ -28,7 +29,7 @@ const FileInput = ({theme, setImage, imageUrl, image}) => {
     )
 };
 
-function TeacherStory ({theme, user}) {
+function TeacherStory ({theme}) {
     //save file data from user
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
@@ -41,8 +42,9 @@ function TeacherStory ({theme, user}) {
           setImageUrl(URL.createObjectURL(image));
         }
       }, [image]);
-    //for MVP purposes
 
+    const user = useStoreState((state) => state.user);
+    //for MVP purposes
     if(!user) user = 'Ms. Holubeck'
     return (  
         <div className = 'teacherStory'>
@@ -62,7 +64,7 @@ function TeacherStory ({theme, user}) {
                 </Box>
                 <Box component="form"  className='teacher-story-info'style={{display: 'flex', flexDirection: 'column'}}>
                     <TextField label='Title' placeholder={'Help out Ms. McRae\'s 5th Grade Math Club'} onInput = {(e) => setTitle(e.target.value)} required ></TextField>
-                    <TextField label='Your Story' onInput = {(e) => setDescription(e.target.value)} placeholder='Help give my students dry erase boards and markers to help us practice for math competitions' required></TextField>
+                    <TextField label='Your Story' onInput = {(e) => setStory(e.target.value)} placeholder='Help give my students dry erase boards and markers to help us practice for math competitions' required></TextField>
                     <FileInput theme={theme} image={image} setImage={setImage} imageUrl={imageUrl}></FileInput>
                     <Button
                         color="orange"

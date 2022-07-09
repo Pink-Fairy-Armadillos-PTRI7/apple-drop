@@ -10,10 +10,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import { useStoreActions } from 'easy-peasy';
-import { useStoreState} from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
-const SignIn = ({ theme, setShowSignUp, setShowSignIn}) => {
+const SignIn = ({ theme, setShowSignUp, setShowSignIn }) => {
   const setUser = useStoreActions((state) => state.setUser);
   const user = useStoreState((state) => state.user);
   const handleSubmit = (event) => {

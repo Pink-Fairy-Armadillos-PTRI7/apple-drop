@@ -12,11 +12,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
+import { useStoreState } from 'easy-peasy';
 
-const SignUp = ({ theme, setShowSignUp, setShowSignIn, user, setUser }) => {
+const SignUp = ({ theme, setShowSignUp, setShowSignIn, setUser }) => {
   // State
   const [prefix, setPrefix] = useState('');
-
+  const user = useStoreState((state) => state.user);
   // Functions
   const handleSubmit = (event) => {
     event.preventDefault();

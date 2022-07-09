@@ -25,7 +25,7 @@ function SearchBar (props) {
                 color: 'black'
             }} 
             variant="contained"
-                component={Link} to = '/'
+                component={Link} to = {`/search/${searchQuery}`}
                  >
                 Search
              </Button>

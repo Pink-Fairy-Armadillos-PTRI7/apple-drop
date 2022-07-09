@@ -11,13 +11,13 @@ import '../style.css';
 import theme from './theme';
 import Navbar from './navBar.jsx';
 import Home from './Home.jsx';
-import TeacherDash from './TeacherDash.jsx';
-import CreateList from './CreateList.jsx'
-import TeacherStory from './TeacherStory.jsx';
+import CreateList from './CreateList.jsx';
+import ListContainer from './ListContainer.jsx';
+import TeacherDash from './TeacherDash.jsx'
+import TeacherStory from './TeacherStory.jsx'
 
 import Auth from './Auth.jsx';
 import { ErrorBoundary } from '../lib/ErrorBoundary.js';
-
 import { useStoreActions } from 'easy-peasy';
 
 const App = () => {
@@ -25,16 +25,12 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Navbar theme={theme} setUser={setUser} /> */}
-      {/* <Routes>
-        <Route exact path='/' element={<Home theme={theme} />} />
-        <Route exact path='/create-list' element={<CreateList theme={theme} />} />
-      </Routes> */}
       <ErrorBoundary>
-          <Navbar theme={theme} setUser={setUser} />
+        <Navbar theme={theme} setUser={setUser} />
         <Auth>
-          {/* <Navbar theme={theme} setUser={setUser} /> */}
           <Routes>
+          <Route exact path='/search' element={<ListContainer theme={theme} />} />
+          <Route exact path='/search/:zip' element={<ListContainer theme={theme}/>} />
             <Route exact path="/" element={<Home theme={theme} />} />
             <Route
               exact
@@ -42,7 +38,7 @@ const App = () => {
               element={<CreateList theme={theme} />}
             />
             <Route exact path = '/dashboard' element={<TeacherDash theme = {theme} />} />
-            <Route exact path = '/story' element={<TeacherStory theme = {theme} user = {user} /> }/>
+            <Route exact path = '/story' element={<TeacherStory theme = {theme}  /> }/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Auth>

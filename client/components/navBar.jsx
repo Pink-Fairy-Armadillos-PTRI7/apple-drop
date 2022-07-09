@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import DrawerComp from './DrawerComp.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
+import logo from '../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -69,6 +70,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 // }
 import Cookies from 'js-cookie';
 
+
 const Navbar = ({ theme, setUser }) => {
   const user = useStoreState((state) => state.user);
 
@@ -99,32 +101,32 @@ const Navbar = ({ theme, setUser }) => {
             {mobileView ? (
               <>
                 <DrawerComp setShowSignIn={setShowSignIn} user={user} />
-                <Typography
-                  variant="h8"
-                  component={Link}
-                  to={'/'}
-                  sx={{
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    color: 'inherit',
-                  }}
-                >
-                  Apple Drop
+                <Typography variant='h6' 
+                  component={Link} 
+                  to={'/'} 
+                  sx={{ 
+                    cursor: 'pointer', 
+                    textDecoration: 'none', 
+                    color: 'inherit', 
+                    verticalAlign: 'center', 
+                    display: 'flex', 
+                    alignItems: 'center'}}>
+                  <img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop
                 </Typography>
               </>
             ) : (
               <>
-                <Typography
-                  variant="h8"
-                  component={Link}
-                  to={'/'}
-                  sx={{
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    color: 'inherit',
-                  }}
-                >
-                  Apple Drop
+                <Typography variant='h6' 
+                  component={Link} 
+                  to={'/'} 
+                  sx={{ 
+                    cursor: 'pointer', 
+                    textDecoration: 'none', 
+                    color: 'inherit', 
+                    verticalAlign: 'center', 
+                    display: 'flex', 
+                    alignItems: 'center'}}>
+                  <img style={{height:'60px', paddingRight: '10px' }} src={logo}/>Apple Drop
                 </Typography>
                 {user ? (
                   <>
