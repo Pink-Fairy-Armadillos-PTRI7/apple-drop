@@ -13,21 +13,12 @@ import fetcher from '../lib/fetcher.js';
 import mapper from '../lib/mapper.js'
 
 
-
-
-
-
-
 //ULTIMATELY RELYING ON THE PERSISTENCE OF THE USER ID
 const id = Cookies.get('id');
-<<<<<<< HEAD
-const token = Cookies.get('token');
-=======
-const navigate = useNavigate('/')
-
->>>>>>> dev
+//hello
 //allows user to input image from their own file system
 const FileInput = ({theme, setImage, imageUrl, image}) => {
+    const navigate = useNavigate()
     return (
         <>
             <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }} onChange={e => setImage(e.target.files[0])} />;
@@ -89,37 +80,19 @@ const [parsedData, setParsedData] = useState([]);
 
     useEffect(() => {
         console.log(parsedData, 'parseedddd')
-<<<<<<< HEAD
-    }, [parsedData])
-
-  const handleUpload = async () => {
-      const result = await fetch('/api/story/' + id, {
-          method: 'POST',
-         body: JSON.stringify(parsedData[0]) });
-
-    if (result.status === 'success') {
-      setLoading(false);
-      setSuccess(true);
-console.log('success')
-=======
         const result = fetcher('/story/' + id, parsedData[0]);
          if (result.status === 'success') {
       setLoading(false);
              setSuccess(true);
              navigate('/dashboard')
->>>>>>> dev
       return;
     }
     console.log('error')
     setLoading(false);
     setError(true);
-<<<<<<< HEAD
-  };
-=======
     }, [parsedData])
 
 
->>>>>>> dev
 
     useEffect(() => {
         if (image) {
@@ -132,11 +105,7 @@ console.log('success')
       
            await beforeUpload();
            await handleUpload()
-<<<<<<< HEAD
-            console.log('data is=>', data)
-=======
            
->>>>>>> dev
         }
         catch (err){
             console.log(err)
