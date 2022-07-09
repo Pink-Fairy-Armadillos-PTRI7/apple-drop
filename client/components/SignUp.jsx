@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 
-const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
+const SignUp = ({ theme, setShowSignUp, setShowSignIn, user, setUser }) => {
   // State
   const [prefix, setPrefix] = useState('');
 
@@ -25,7 +25,7 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
     fetch('/api/signup', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: data.get('email'),
@@ -38,18 +38,18 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
         street: data.get('street'),
         city: data.get('city'),
         state: data.get('state'),
-        postalCode: data.get('postalCode')
-      })
+        postalCode: data.get('postalCode'),
+      }),
     })
-      .then(response => response.json())
-      .then(userData => {
+      .then((response) => response.json())
+      .then((userData) => {
         console.log(userData);
         // Throw error if there was no Id or token
         if (!userData) throw new Error('Incorrect response from server');
         setUser(userData); // Id, token, email, password, firstname, lastname, address
         closePopup();
       })
-      .catch(e => alert(e.message));
+      .catch((e) => alert(e.message));
   };
 
   const closePopup = () => setShowSignUp(false);
@@ -57,10 +57,38 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
   const switchToSignIn = () => setShowSignIn(true);
 
   return (
-    <div style={{ top: 0, position: 'fixed', zIndex: 100, width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      style={{
+        top: 0,
+        position: 'fixed',
+        zIndex: 100,
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <ThemeProvider theme={theme}>
-        <div onClick={closePopup} style={{ width: '100%', height: '100vh', backgroundColor: 'rgb(0, 0, 0, .65)' }}></div>
-        <Container component="div" maxWidth="xs" sx={{ position: 'fixed', zIndex: 200, backgroundColor: theme.palette.cream.main, borderRadius: 4, paddingBottom: 4 }}>
+        <div
+          onClick={closePopup}
+          style={{
+            width: '100%',
+            height: '100vh',
+            backgroundColor: 'rgb(0, 0, 0, .65)',
+          }}
+        ></div>
+        <Container
+          component="div"
+          maxWidth="xs"
+          sx={{
+            position: 'fixed',
+            zIndex: 200,
+            backgroundColor: theme.palette.cream.main,
+            borderRadius: 4,
+            paddingBottom: 4,
+          }}
+        >
           <CssBaseline />
           <Box
             sx={{
@@ -73,10 +101,17 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>Personal Info</h3>
+                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>
+                    Personal Info
+                  </h3>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -104,17 +139,20 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
                 <Grid item xs={12}>
                   <InputLabel id="prefix-label">Prefix</InputLabel>
                   <Select
-                    sx={{ background: theme.palette.blueCream.light, width: '100%' }}
+                    sx={{
+                      background: theme.palette.blueCream.light,
+                      width: '100%',
+                    }}
                     labelId="prefix-label"
                     id="prefix"
                     value={prefix}
                     label="Prefix"
                     onChange={(e) => setPrefix(e.target.value)}
                   >
-                    <MenuItem value='Ms.'>Ms.</MenuItem>
-                    <MenuItem value='Mrs.'>Mrs.</MenuItem>
-                    <MenuItem value='Mr.'>Mr.</MenuItem>
-                    <MenuItem value='Mx.'>Mx.</MenuItem>
+                    <MenuItem value="Ms.">Ms.</MenuItem>
+                    <MenuItem value="Mrs.">Mrs.</MenuItem>
+                    <MenuItem value="Mr.">Mr.</MenuItem>
+                    <MenuItem value="Mx.">Mx.</MenuItem>
                   </Select>
                 </Grid>
                 <Grid item xs={12}>
@@ -141,7 +179,9 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>School Address</h3>
+                  <h3 style={{ fontWeight: 'normal', margin: 0 }}>
+                    School Address
+                  </h3>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -221,7 +261,18 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link sx={{ color: theme.palette.orange.dark, textDecorationColor: theme.palette.orange.dark, cursor: 'pointer' }} onClick={() => { closePopup(); switchToSignIn(); }} variant="body2">
+                  <Link
+                    sx={{
+                      color: theme.palette.orange.dark,
+                      textDecorationColor: theme.palette.orange.dark,
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                      closePopup();
+                      switchToSignIn();
+                    }}
+                    variant="body2"
+                  >
                     Already have an account? Sign in
                   </Link>
                 </Grid>
@@ -232,6 +283,6 @@ const SignUp = ({ theme, setShowSignUp, setShowSignIn }) => {
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default SignUp;
