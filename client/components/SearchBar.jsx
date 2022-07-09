@@ -9,9 +9,9 @@ function SearchBar (props) {
     console.log('search query is=>', searchQuery);
     return ( 
         <form style = {{display: 'flex'}}>
-            <TextField  sx = {{borderRadius: 2,boxShadow: 2}}
+            <TextField  sx = {{borderRadius: 2,boxShadow: 2, backgroundColor: 'white'}}
                 id="outlined-search"
-                label="Search by zipcode"
+                label="Search by postal code"
                 variant = 'filled'
                 placeholder='ex. 33063'
                 type="search"
@@ -22,6 +22,7 @@ function SearchBar (props) {
                 background: "#FEE440",
                 borderRadius: 4,
                 boxShadow: 3,
+                color: 'black'
             }} 
             variant="contained"
                 component={Link} to = {`/search/${searchQuery}`}

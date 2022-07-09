@@ -19,7 +19,7 @@ const Auth = ({ children }) => {
   const location = useLocation();
   const nav = useNavigate();
 
-  const publicRoutes = ['/'];
+  const publicRoutes = ['/', '/search', '/search/:zip'];
 
   const { user, isError, isLoading } = me(id);
 
