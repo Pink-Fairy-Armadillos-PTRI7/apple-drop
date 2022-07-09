@@ -12,10 +12,13 @@ import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import '../style.css'
 
 //ULTIMATELY RELYING ON THE PERSISTENCE OF THE USER ID
-
 //TabPanel component for Tab display
+const token = Cookies.get('token');
 function TabPanel (props) {
     //children passes the string text btw TabPanel, value and index makes sure we only render the children info when user clicks on that tab
     const {children, value, index, ...other } = props
@@ -52,6 +55,7 @@ const AllLists = (props) => {
         (list.name)? name = list.name: name = 'Supplies for my 3rd grade classroom'
         const dateCreated = createDate(list.createdAt)
         const lastUpdated = createDate(list.updatedAt)
+        //need to add functionality to display all items in list
         listArr.push(
             <div key = {`listItem${el}`}>
                 <ListItem sx ={{display: 'flex', justifyContent: 'space-around'}}>
@@ -85,21 +89,46 @@ function Address(props) {
        <Box sx ={{
             fontSize: '.3em'
        }}>
-            <p>{teacherAddress.schoolName}</p>
-            <div style ={{}}>
-                <p>{teacherAddress.street}</p>
-                <p>{teacherAddress.city}, {teacherAddress.state} {teacherAddress.postalCode}</p>
-            </div>
+       <div className="dash-address">
+        <Typography>{teacherAddress.schoolName}</Typography>
+                <div>
+                    <Typography>{teacherAddress.street}</Typography>
+                    <Typography>{teacherAddress.city}, {teacherAddress.state} {teacherAddress.postalCode}</Typography>
+                    {/* <p>{teacherAddress.street}</p>
+                    <p>{teacherAddress.city}, {teacherAddress.state} {teacherAddress.postalCode}</p> */}
+                </div>
+       </div>
        </Box>
+    )
+}
 
+function Story(props) {
+    const {teacherStory} = props;
+    return(
+        teacherStory.length > 0 ? teacherStory.map((ele)=>{
+            console.log('ele', ele)
+            return (
+                <Box >
+                  <div style={{fontSize: '.3em'}}>
+                        <Typography>{ele.title}</Typography>
+                        {/* <p>{ele.title}</p> */}
+                        <Typography>{ele.description}</Typography>
+                        {/* <p>{ele.description}</p> */}
+                        <img src={ele.image} style={{width: '50%'}} />
+                    </div>
+               </Box> 
+            )
+       
+        })
+        : null
+      
     )
 }
 
 
-
-
 //Teacher Dashboard Component
 function TeacherDash ({theme}) {
+    const user = useStoreState((state) => state.user);
     //set value to keep track of the individual tabs
     const [value, setValue] = useState(0)
     //handle change to make sure we capture value of current tab
@@ -113,14 +142,14 @@ function TeacherDash ({theme}) {
 
     //function to fetch lists based on teacher id
     async function fetchTeacherLists() {
-        const id = '62c4c0be9d30e99a23cbb26f'
+        const id = user._id
         try {
             const teacherLists = await axios.get(`/api/list/${id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+                    `Bearer ${token}`
                 }
             })
         //return the teacherLists data 
@@ -132,7 +161,7 @@ function TeacherDash ({theme}) {
     }
     // fetch individual teacher story 
     async function fetchTeacherStory() {
-        const id = '62c4c0be9d30e99a23cbb26f'
+        const id = user._id
         //will get object with title, image, and description properties
         try {
             const teacherStory = await axios.get(`/api/myStories/${id}`,
@@ -140,10 +169,11 @@ function TeacherDash ({theme}) {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+                    `Bearer ${token}`
                 }
             })
             console.log('teachers are =>', teacherStory.data)
+            setStory(teacherStory.data)
         }
         catch(err) {
             console.log('Error in fetching teacher story', err)
@@ -153,7 +183,7 @@ function TeacherDash ({theme}) {
 
     //fetch individual teacher address
     async function fetchTeacherAddress() {
-        const id = '62c4c0be9d30e99a23cbb26f'
+        const id = user._id
         //response is object containing reference to user's address
             //address schema has following properties: schoolName, street, city, state, postalCode
         try {
@@ -162,10 +192,9 @@ function TeacherDash ({theme}) {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0YzBiZTlkMzBlOTlhMjNjYmIyNmYiLCJlbWFpbCI6InRlc3RAMXRlc3QuY29tIiwiaWF0IjoxNjU3MjM0MzYxLCJleHAiOjE2NTczMjA3NjF9.d0GxoSf7a7Gx1GvzC8_hsjGIKsDgEu3a59dSXfjSjvQ',
+                    `Bearer ${token}`
                 }
             })
-            console.log('teachers are =>', teacherInfo.data)
             setAddress(teacherInfo.data.address)
         }
         catch(err) {
@@ -175,7 +204,7 @@ function TeacherDash ({theme}) {
     //useEffect to trigger getting teacher info based on id as soon as teacher component loads
     useEffect(() =>{
         fetchTeacherLists()
-        // fetchTeacherStory()
+        fetchTeacherStory()
         fetchTeacherAddress()
     }, [])
 
@@ -188,17 +217,17 @@ function TeacherDash ({theme}) {
                         justifyContent: 'center',
                         height: 200
                     }}>
-                    <h1 style = {{color: 'white', paddingTop: '1em'}}>Hello, Ms.Holubeck!</h1>
+                    <h1 style = {{color: 'white', paddingTop: '1em'}}>Hello, {user.firstName}</h1>
                 </Box>
                 <div className = 'teacher-info'>
                     <Box className ='teacher-column' id = 'teacher-list' sx = {{width: '65%'}}>
-                        <h2 style ={{color: theme.palette.orange.main}}>Lists</h2>
+                        <h2 style ={{color: theme.palette.orange.main, marginBottom: 'none'}}>Lists</h2>
                         <Tabs value = {value} onChange = {handleChange}>
                             <Tab label = 'All'/>
                             <Tab label = 'Drafts'/>
                         </Tabs>
                         <TabPanel value = {value} index = {0}> 
-                            <AllLists teacherLists = {teacherLists} theme = {theme}></AllLists>
+                            <AllLists className="dash-lists" teacherLists = {teacherLists} theme = {theme}></AllLists>
                         </TabPanel>
                         <TabPanel value = {value} index = {1}>
                         </TabPanel>
@@ -212,7 +241,6 @@ function TeacherDash ({theme}) {
                                 ':hover': {
                                     bgcolor: 'theme.palette.blue.main', // theme.palette.primary.main
                                 }
-                                
                             }}
                             component = { Link } to = '/create-list'
                          > 
@@ -221,9 +249,9 @@ function TeacherDash ({theme}) {
                     </Box>
                     <Box className ='teacher-column' id = 'teacher-story' sx = {{width: '35%', marginLeft: '1em'}}>
                         <h3 style ={{color: theme.palette.orange.main}} >Your Story</h3>
-                            <h6> </h6>
+                            <Story  teacherStory={teacherStory}></Story>
                         <h3 style ={{color: theme.palette.orange.main}} >Your School </h3>
-                            <Address teacherAddress = {teacherAddress}></Address>
+                            <Address  teacherAddress = {teacherAddress}></Address>
                     </Box>
                   
                 </div>
