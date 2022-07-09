@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import Box from '@mui/material/Box';
 import { TextField } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -19,7 +20,12 @@ import mapper from '../lib/mapper.js'
 
 //ULTIMATELY RELYING ON THE PERSISTENCE OF THE USER ID
 const id = Cookies.get('id');
+<<<<<<< HEAD
 const token = Cookies.get('token');
+=======
+const navigate = useNavigate('/')
+
+>>>>>>> dev
 //allows user to input image from their own file system
 const FileInput = ({theme, setImage, imageUrl, image}) => {
     return (
@@ -83,6 +89,7 @@ const [parsedData, setParsedData] = useState([]);
 
     useEffect(() => {
         console.log(parsedData, 'parseedddd')
+<<<<<<< HEAD
     }, [parsedData])
 
   const handleUpload = async () => {
@@ -94,12 +101,25 @@ const [parsedData, setParsedData] = useState([]);
       setLoading(false);
       setSuccess(true);
 console.log('success')
+=======
+        const result = fetcher('/story/' + id, parsedData[0]);
+         if (result.status === 'success') {
+      setLoading(false);
+             setSuccess(true);
+             navigate('/dashboard')
+>>>>>>> dev
       return;
     }
     console.log('error')
     setLoading(false);
     setError(true);
+<<<<<<< HEAD
   };
+=======
+    }, [parsedData])
+
+
+>>>>>>> dev
 
     useEffect(() => {
         if (image) {
@@ -112,7 +132,11 @@ console.log('success')
       
            await beforeUpload();
            await handleUpload()
+<<<<<<< HEAD
             console.log('data is=>', data)
+=======
+           
+>>>>>>> dev
         }
         catch (err){
             console.log(err)
